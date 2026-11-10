@@ -1142,15 +1142,15 @@ function mountCalendly() {
   const m = $("#calMount");
   if (!CONFIG.calendlyUrl) { m.innerHTML = `<p style="padding:28px">Booking opens soon.</p>`; return; }
   if (calFailed) return calFallback();
-  m.innerHTML = `<div class="calendly-inline-widget" style="min-width:300px;height:700px"></div><p class="cal-alt">Calendar not loading? <a href="${calendlyLink()}" target="_blank" rel="noopener">Open it in a new tab</a>.</p>`;
-  const init = () => window.Calendly && Calendly.initInlineWidget({ url: calendlyLink(), parentElement: $(".calendly-inline-widget") });
+  const url = calendlyLink();
+  m.innerHTML = `<div class="calendly-inline-widget" data-url="${url}" style="min-width:300px;height:700px"></div><p class="cal-alt">Calendar not loading? <a href="${url}" target="_blank" rel="noopener">Open it in a new tab</a>.</p>`;
   clearTimeout(calTimer);
-  calTimer = setTimeout(() => { if (!$(".calendly-inline-widget iframe")) calFallback(); }, 5000);
-  if (window.Calendly) return init();
+  calTimer = setTimeout(() => { if (!$(".calendly-inline-widget iframe")) calFallback(); }, 9000);
+  if (window.Calendly) { Calendly.initInlineWidget({ url, parentElement: $(".calendly-inline-widget") }); return; }
   if (calLoaded) return;
   calLoaded = true;
   const s = document.createElement("script"); s.src = "https://assets.calendly.com/assets/external/widget.js"; s.async = true;
-  s.onload = init; s.onerror = calFallback; document.head.appendChild(s);
+  s.onerror = calFallback; document.head.appendChild(s);
 }
 mountCalendly();
 
