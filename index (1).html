@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pilotory: AI products and MVPs for founders who don't code</title>
+<meta name="description" content="Pilotory is a product studio for non-technical founders. We scope, design, build and launch AI products and MVPs, and you own the code from day one.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Pilotory","description":"Product studio that designs, builds and launches AI products and MVPs for non-technical founders.","areaServed":"Worldwide"}
+</script>
+<style>
+:root{
+  --paper:#F5F6FA; --paper-2:#ECEEF6; --line:#D9DCEA; --grid:rgba(67,56,202,.075);
+  --ink:#141A33; --ink-2:#4A5170; --ink-3:#6B7190;
+  --indigo:#4338CA; --indigo-2:#3730A3; --teal:#0F766E; --teal-b:#14B8A6; --amber:#F59E0B; --amber-ink:#92400E;
+  --night:#0A1024; --night-2:#121A38; --night-line:#26305A; --night-ink:#E8EAF6; --night-ink-2:#A3A9C9;
+  --grad:linear-gradient(120deg,#4338CA 0%,#14B8A6 100%);
+  --display:"Jost",system-ui,sans-serif; --body:"Source Sans 3",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --wrap:1180px; --r-s:6px; --r-m:12px; --r-l:20px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--indigo)}
+a:hover{color:var(--indigo-2)}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px}
+h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.015em;line-height:1.08;margin:0}
+h2{font-size:clamp(34px,4.4vw,54px)}
+h3{font-size:24px;line-height:1.2}
+p{margin:0 0 1em}
+.lede{font-size:21px;line-height:1.55;color:var(--ink-2);max-width:36em}
+.blueprint{background-color:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:32px 32px}
+section{position:relative}
+.sec{padding:120px 0}
+.sec-head{max-width:760px;margin-bottom:56px}
+.sec-head p{margin-top:18px}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:16px;z-index:99;background:#fff;padding:8px 12px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;white-space:nowrap;font:600 17px/1 var(--body);padding:16px 24px;border-radius:999px;text-decoration:none;border:0;cursor:pointer;transition:transform .15s ease,background .15s}
+.btn-primary{background:var(--grad);color:#fff}
+.btn-primary:hover{color:#fff;transform:translateY(-1px)}
+.night a.btn-primary,.night a.btn-primary:hover{color:#fff}
+.btn-quiet{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn-quiet:hover{color:var(--ink);background:rgba(20,26,51,.05)}
+.night .btn-quiet{color:var(--night-ink);box-shadow:inset 0 0 0 1.5px var(--night-ink-2)}
+.btn-ink{background:var(--ink);color:#fff}.btn-ink:hover{color:#fff;background:#262d4f}
+
+/* header */
+.top{position:sticky;top:0;z-index:40;background:rgba(245,246,250,.96);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font:600 23px/1 var(--display);letter-spacing:-.01em}
+.brand svg{width:34px;height:34px}
+.nav{display:flex;gap:30px;align-items:center}
+.nav a{color:var(--ink-2);text-decoration:none;font-weight:500;font-size:16px}
+.nav a:hover{color:var(--ink)}
+.nav .btn{padding:12px 20px;font-size:15px;color:#fff}
+@media (max-width:900px){.nav a:not(.btn){display:none}}
+
+/* flight rail */
+.rail{position:fixed;left:22px;top:110px;bottom:40px;width:14px;z-index:30;pointer-events:none}
+.rail::before{content:"";position:absolute;left:6px;top:0;bottom:0;border-left:2px dotted rgba(67,56,202,.35)}
+.rail-fill{position:absolute;left:5px;top:0;width:4px;border-radius:2px;background:var(--grad);height:0}
+.rail-plane{position:absolute;left:-5px;top:0;width:24px;height:24px;transform:translateY(-50%) rotate(90deg)}
+@media (max-width:1320px){.rail{display:none}}
+
+/* hero */
+.hero{padding:72px 0 40px;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.02fr 1fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(40px,4.7vw,66px);font-weight:600;line-height:1.02;letter-spacing:-.025em}
+.hero .lede{margin:26px 0 36px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+.hero-note{margin-top:22px;font-size:16px;color:var(--ink-3)}
+.board{position:relative;aspect-ratio:1000/864;border-radius:var(--r-l);background:#fff;box-shadow:0 0 0 1px var(--line),0 30px 60px -30px rgba(20,26,51,.35)}
+.board-shot{position:absolute;inset:0;border-radius:var(--r-l);overflow:hidden;opacity:0;animation:shotIn .9s ease 1.9s forwards}
+.board-shot img{width:100%;height:100%;object-fit:cover}
+.board svg.sketch{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.sk{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.5s cubic-bezier(.6,.1,.3,1) forwards,skFade .8s ease 2s forwards}
+.sk.d2{animation-delay:.25s,2s}.sk.d3{animation-delay:.5s,2s}.sk.d4{animation-delay:.75s,2s}
+.anno{font:500 12.5px var(--mono);fill:var(--indigo)}
+.anno-line{stroke:var(--indigo);stroke-width:1.2;fill:none;stroke-dasharray:3 4}
+.anno-g{opacity:0;animation:annoLife 1.6s ease .9s forwards}
+@keyframes annoLife{0%{opacity:0}25%{opacity:1}70%{opacity:1}100%{opacity:0}}
+.board-tag{position:absolute;left:18px;bottom:-18px;background:var(--ink);color:#fff;font:500 14px var(--body);padding:9px 14px;border-radius:999px;display:flex;gap:8px;align-items:center;white-space:nowrap}
+.board-tag .txt{display:grid}.board-tag .a,.board-tag .b{grid-area:1/1;transition:opacity .4s}
+.board-tag .b{opacity:0}
+.board.done .board-tag .a{opacity:0}.board.done .board-tag .b{opacity:1}
+.board-tag .dot{width:8px;height:8px;border-radius:50%;background:var(--amber);flex:none}
+.board.done .board-tag .dot{background:var(--teal-b)}
+.board-tag a{color:#fff}
+.flight{position:absolute;right:-60px;top:-70px;width:360px;height:320px;pointer-events:none}.flight svg{position:absolute;left:0;top:0;overflow:visible}.flight .plane{position:absolute;left:0;top:0;width:30px;height:30px}
+.flight .trail{fill:none;stroke:url(#trailGrad);stroke-width:2.5;stroke-dasharray:2 9;stroke-linecap:round;opacity:0;animation:fadeIn .6s ease 2.9s forwards}
+.flight .plane{offset-path:path("M20 300 C 120 260, 160 120, 330 40");offset-rotate:auto;opacity:0;animation:fly 1.6s cubic-bezier(.5,0,.3,1) 2.8s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes skFade{to{stroke:var(--indigo);opacity:0}}
+@keyframes fadeIn{to{opacity:1}}
+@keyframes shotIn{to{opacity:1}}
+@keyframes fly{0%{offset-distance:0%;opacity:0}12%{opacity:1}100%{offset-distance:100%;opacity:1}}
+@media (max-width:960px){.hero-grid{grid-template-columns:1fr;gap:56px}.flight{display:none}}
+
+/* proof strip */
+.wrap.proof{padding-top:56px}
+.proof-row{display:grid;grid-template-columns:repeat(4,1fr);border-top:1.5px solid var(--ink);border-bottom:1px solid var(--line)}
+.proof-item{padding:22px 22px 22px 0;text-decoration:none;color:var(--ink);display:block}
+.proof-item + .proof-item{padding-left:22px;border-left:1px solid var(--line)}
+.proof-item b{display:block;font:600 34px/1.05 var(--display);letter-spacing:-.02em}
+.proof-item span{display:block;color:var(--ink-2);font-size:16px;margin-top:6px}
+.proof-item em{display:block;font-style:normal;color:var(--indigo);font-weight:600;font-size:15px;margin-top:10px}
+.proof-item:hover em{text-decoration:underline}
+.proof-foot{font-size:14px;color:var(--ink-3);margin-top:12px}
+@media (max-width:860px){.proof-row{grid-template-columns:1fr 1fr}.proof-item:nth-child(3){padding-left:0;border-left:0}.proof-item:nth-child(n+3){border-top:1px solid var(--line)}}
+
+/* chooser */
+.chooser{padding:96px 0 40px}
+.choose-q{font:600 clamp(28px,3vw,38px)/1.15 var(--display);margin-bottom:26px}
+.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.choice{text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:var(--r-m);padding:22px 22px 24px;cursor:pointer;font:inherit;color:var(--ink);transition:border-color .15s,box-shadow .15s}
+.choice:hover{border-color:var(--ink-3)}
+.choice b{display:block;font:600 21px/1.25 var(--display);margin-bottom:6px}
+.choice span{color:var(--ink-2);font-size:16px}
+.choice[aria-pressed="true"]{border-color:var(--indigo);box-shadow:0 0 0 3px rgba(67,56,202,.14)}
+.choice-answer{margin-top:20px;min-height:28px;font-size:18px;color:var(--ink-2)}
+.choice-answer a{font-weight:600}
+@media (max-width:760px){.choices{grid-template-columns:1fr}}
+
+/* traps */
+.traps{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1.5px solid var(--ink)}
+.trap{padding:36px 40px 8px 0}
+.trap + .trap{padding-left:40px;border-left:1px solid var(--line)}
+.trap h3{font-size:30px;margin-bottom:14px}
+.trap p{color:var(--ink-2)}
+.trap .fix{color:var(--ink);border-left:3px solid var(--teal-b);padding-left:14px;margin-top:20px}
+@media (max-width:820px){.traps{grid-template-columns:1fr}.trap + .trap{padding-left:0;border-left:0;border-top:1px solid var(--line)}}
+
+/* process */
+.path{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:20px}
+.path-line{position:absolute;left:0;right:0;top:19px;height:2px;border-top:2px dotted rgba(67,56,202,.45)}
+.stop{position:relative}
+.stop-mark{width:40px;height:40px;border-radius:50%;background:var(--paper);border:2px solid var(--indigo);display:grid;place-items:center;font:600 17px var(--display);color:var(--indigo);margin-bottom:22px;position:relative}
+.stop:last-child .stop-mark{background:var(--amber);border-color:var(--amber);color:var(--ink)}
+.stop h3{margin-bottom:10px}
+.stop p{color:var(--ink-2);font-size:17px}
+.stop .get{font-size:16px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:var(--r-s);padding:12px 14px;margin-top:4px}
+.stop .get b{color:var(--teal)}
+@media (max-width:900px){.path{grid-template-columns:1fr 1fr;row-gap:44px}.path-line{display:none}}
+@media (max-width:560px){.path{grid-template-columns:1fr}}
+
+/* night / work */
+.night{background:var(--night);color:var(--night-ink)}
+.night .lede,.night p{color:var(--night-ink-2)}
+.night h2,.night h3{color:#fff}
+.night a{color:#8EE6D9}
+.records{display:flex;flex-direction:column;gap:96px}
+.record{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center}
+.record:nth-child(even){grid-template-columns:1fr 1.1fr}
+.record:nth-child(even) .frame{order:2}
+.frame{border-radius:var(--r-m);overflow:hidden;background:var(--night-2);box-shadow:0 0 0 1px var(--night-line),0 40px 80px -40px rgba(20,184,166,.35)}
+.frame img{width:100%;height:auto;background:var(--night-2)}
+.record > *,.more-work > *,.hero-grid > *,.crew > *,.book-grid > *,.traps > *,.path > *{min-width:0}
+.frame-bar{height:34px;display:flex;align-items:center;gap:7px;padding:0 14px;border-bottom:1px solid var(--night-line)}
+.frame-bar i{width:10px;height:10px;border-radius:50%;background:#2E3866}
+.frame-bar span{margin-left:10px;font:400 12.5px var(--mono);color:var(--night-ink-2)}
+.strip{font:400 13.5px/1.5 var(--mono);color:#8EE6D9;margin-bottom:16px}
+.record h3{font-size:clamp(28px,3vw,38px);margin-bottom:14px}
+.record .figure{display:flex;align-items:baseline;gap:12px;margin:22px 0 8px}
+.record .figure b{font:600 48px/1 var(--display);color:#fff;letter-spacing:-.02em}
+.record .figure span{color:var(--night-ink-2);font-size:16px}
+.record .src{font-size:14px;color:var(--night-ink-2)}
+.record ul{padding:0;margin:18px 0 22px;list-style:none}
+.record li{padding-left:22px;position:relative;margin-bottom:8px;color:var(--night-ink-2)}
+.record li::before{content:"";position:absolute;left:2px;top:.62em;width:8px;height:2px;background:var(--teal-b)}
+.record .live{font-weight:600;text-decoration:none;border-bottom:1.5px solid currentColor}
+.more-work{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:110px;padding-top:44px;border-top:1px solid var(--night-line)}
+.mini .frame{margin-bottom:18px}
+.mini h3{font-size:22px;margin-bottom:6px}
+.mini p{font-size:16px;margin-bottom:10px}
+@media (max-width:900px){.record,.record:nth-child(even){grid-template-columns:1fr;gap:28px}.record:nth-child(even) .frame{order:0}.more-work{grid-template-columns:1fr;gap:48px}}
+
+/* tools */
+.tabs{display:flex;gap:8px;margin-bottom:-1.5px;position:relative;z-index:1;flex-wrap:wrap}
+.tab{font:600 17px var(--body);padding:14px 22px;border-radius:var(--r-m) var(--r-m) 0 0;border:1.5px solid transparent;background:transparent;color:var(--ink-2);cursor:pointer}
+.tab[aria-selected="true"]{background:#fff;border-color:var(--ink);border-bottom-color:#fff;color:var(--ink)}
+.tool{background:#fff;border:1.5px solid var(--ink);border-radius:0 var(--r-l) var(--r-l) var(--r-l);padding:44px}
+.tool-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:48px}
+.q{border:0;padding:0;margin:0 0 26px}
+.q legend{font:600 19px/1.3 var(--display);margin-bottom:12px;padding:0}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;inset:0;cursor:pointer;margin:0}
+.opt span{display:inline-block;padding:10px 16px;border-radius:999px;border:1.5px solid var(--line);font-size:16px;font-weight:500;color:var(--ink-2);background:var(--paper)}
+.opt input:checked + span{background:var(--ink);border-color:var(--ink);color:#fff}
+.opt input:focus-visible + span{outline:3px solid var(--amber);outline-offset:2px}
+.result{background:var(--paper);border-radius:var(--r-m);padding:30px;position:sticky;top:96px;align-self:start}
+.result-empty{color:var(--ink-3);font-size:17px}
+.result h3{font-size:20px;margin-bottom:4px;color:var(--ink-2);font-weight:500}
+.big{font:600 44px/1.05 var(--display);letter-spacing:-.02em;margin:4px 0 2px}
+.small{font-size:15px;color:var(--ink-3)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:22px 0}
+.split h4{font:600 16px var(--display);margin:0 0 8px}
+.split ul{margin:0;padding-left:18px;font-size:16px;color:var(--ink-2)}
+.split li{margin-bottom:4px}
+.closest{border-top:1px solid var(--line);padding-top:16px;margin-top:6px;font-size:16px;color:var(--ink-2)}
+.result .btn{margin-top:20px;width:100%;justify-content:center}
+.check-list{display:flex;flex-direction:column;gap:2px}
+.cq{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:12px 0;border-bottom:1px solid var(--paper-2)}
+.cq p{margin:0;font-size:17px}
+.cq .opts{flex-wrap:nowrap}
+.cq .opt span{padding:7px 12px;font-size:14.5px}
+.score{display:flex;align-items:center;gap:14px;margin:6px 0 16px}
+.light{width:18px;height:18px;border-radius:50%}
+.risks{list-style:none;padding:0;margin:0}
+.risks li{padding:12px 0;border-top:1px solid var(--line);font-size:16px;color:var(--ink-2)}
+.risks b{color:var(--ink);display:block;font-size:17px}
+@media (max-width:560px){.tabs{flex-wrap:nowrap;gap:4px}.tab{font-size:15px;padding:12px 12px}.split{grid-template-columns:1fr}}
+@media (max-width:900px){.tool{padding:26px 20px;border-radius:0 var(--r-m) var(--r-m) var(--r-m)}.tool-grid{grid-template-columns:1fr}.result{position:static}.cq{grid-template-columns:1fr}}
+
+/* compare: flight paths */
+.routes{border-top:1.5px solid var(--ink)}
+.stages{display:grid;grid-template-columns:280px 1fr;gap:40px;padding:18px 0 6px;position:sticky;top:72px;background:var(--paper);z-index:2}
+.stage-row{position:relative;height:20px;font:600 14px/1.2 var(--body);color:var(--ink-3)}
+.stage-row i{font-style:normal;position:absolute;top:0;white-space:nowrap;transform:translateX(-50%)}
+.stage-row i:nth-child(1){left:0;transform:none}.stage-row i:nth-child(2){left:25%}.stage-row i:nth-child(3){left:50%}.stage-row i:nth-child(4){left:75%}.stage-row i:nth-child(5){right:0;transform:none}
+.route{display:grid;grid-template-columns:280px 1fr;column-gap:40px;padding:34px 0 36px;border-bottom:1px solid var(--line)}
+.route header{grid-row:1 / span 2}
+.route h3{font-size:24px;display:flex;align-items:center;gap:10px}
+.route .sub{font-size:15px;color:var(--ink-3);margin:6px 0 16px}
+.route .time{font-size:16px;color:var(--ink-2);margin:0}
+.route .time b{display:block;font:600 32px/1.1 var(--display);color:var(--ink);letter-spacing:-.02em}
+.track{position:relative;height:48px;margin-top:4px;background:repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px 25%) left center/100% 14px no-repeat}
+.track::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:2px dotted var(--line)}
+.trail{position:absolute;left:0;top:calc(50% - 2px);height:4px;border-radius:2px;background:var(--ink-3);width:calc(var(--stop) / 4 * 100%);transform-origin:left;transform:scaleX(0);transition:transform 1.1s cubic-bezier(.5,0,.2,1)}
+.track-slow .trail{background:repeating-linear-gradient(90deg,var(--ink-3) 0 10px,transparent 10px 16px)}
+.route-us .trail{background:var(--grad)}
+.mark{position:absolute;left:calc(var(--stop) / 4 * 100%);top:50%;transform:translate(-50%,-50%) scale(.4);opacity:0;transition:opacity .3s ease 1s,transform .4s cubic-bezier(.3,1.6,.5,1) 1s}
+.mark-break,.mark-stall,.mark-clock{width:30px;height:30px;border-radius:50%;background:#fff;border:2px solid}
+.mark-break{border-color:#E5484D}
+.mark-break::before,.mark-break::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:2.5px;background:#E5484D;border-radius:2px;transform:translate(-50%,-50%) rotate(45deg)}
+.mark-break::after{transform:translate(-50%,-50%) rotate(-45deg)}
+.mark-stall{border-color:var(--amber)}
+.mark-stall::before,.mark-stall::after{content:"";position:absolute;top:8px;width:3px;height:10px;background:var(--amber);border-radius:1px;left:9px}
+.mark-stall::after{left:14px}
+.mark-clock{border-color:var(--amber)}
+.mark-clock::before{content:"";position:absolute;left:12px;top:5px;width:2px;height:9px;background:var(--amber-ink);border-radius:1px}
+.mark-clock::after{content:"";position:absolute;left:12px;top:12px;width:7px;height:2px;background:var(--amber-ink);border-radius:1px}
+.mark-plane{width:34px;height:34px;color:var(--teal-b);left:calc(100% - 14px)}
+.mark-label{position:absolute;top:-6px;left:calc(var(--stop) / 4 * 100% + 26px);font:600 14.5px/1.2 var(--body);color:var(--ink);white-space:nowrap;opacity:0;transition:opacity .4s ease 1.2s}
+.route-us .mark-label{left:auto;right:44px;color:var(--teal)}
+.lbl-left .mark-label{left:auto;right:calc(100% - var(--stop) / 4 * 100% + 26px)}
+.route.in .trail{transform:scaleX(1)}
+.route.in .mark{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.route.in .mark-label{opacity:1}
+.route-us .trail{transition-duration:1.5s}
+.route-us .mark{transition-delay:1.4s}.route-us .mark-label{transition-delay:1.6s}
+.story{margin-top:14px;display:grid;grid-template-columns:1.15fr 1fr;column-gap:32px;align-items:start}
+.story .told{grid-column:1 / -1;font:600 19px/1.35 var(--display);color:var(--ink);margin-bottom:8px}
+.story > p:nth-child(2){color:var(--ink-2);font-size:17px;grid-row:2 / span 3;margin:0}
+.fact{grid-column:2;margin:0 0 10px;font-size:15.5px;line-height:1.45;color:var(--ink-2);background:#fff;border:1px solid var(--line);border-radius:var(--r-s);padding:10px 12px}
+.fact b{font:600 22px/1 var(--display);color:var(--ink);margin-right:4px}
+.fact a{font-size:14px;white-space:nowrap}
+.route-us{background:#fff;border:1.5px solid var(--indigo);border-radius:var(--r-l);padding:34px 28px 30px;margin:20px -28px 0;box-shadow:0 0 0 5px rgba(67,56,202,.07)}
+.route-us .fact{background:var(--paper)}
+.route-us .story .told{color:var(--indigo)}
+.answers{margin-top:84px;display:grid;grid-template-columns:1fr 2fr;gap:44px}
+.answers-head h3{font-size:28px;line-height:1.15}
+.answers-head p{color:var(--ink-2);margin-top:14px}
+.answers dl{margin:0;border-top:1.5px solid var(--ink)}
+.answers dl div{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:18px 0;border-bottom:1px solid var(--line)}
+.answers dt{font:600 18px/1.35 var(--display)}
+.answers dd{margin:0;color:var(--ink-2);padding-left:30px;position:relative}
+.answers dd::before{content:"";position:absolute;left:0;top:2px;width:20px;height:20px;border-radius:50%;background:rgba(20,184,166,.15) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='m6 10.4 2.6 2.6L14.2 7.4' fill='none' stroke='%230F766E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/20px no-repeat}
+.cmp-cta{margin-top:56px;display:flex;align-items:center;justify-content:space-between;gap:28px;background:var(--night);color:var(--night-ink);border-radius:var(--r-l);padding:30px 34px}
+.cmp-cta p{margin:0;font:500 20px/1.45 var(--display);max-width:40em}
+@media (max-width:980px){
+  .stages{display:none}
+  .route{grid-template-columns:1fr;padding:30px 0}
+  .route header{grid-row:auto;margin-bottom:12px}
+  .route .time b{font-size:26px}
+  .track{margin-top:30px}
+  .mark-label,.lbl-left .mark-label{left:0;right:auto;top:-26px;white-space:normal}
+  .route-us .mark-label{left:0;right:auto}
+  .story{grid-template-columns:1fr}
+  .story > p:nth-child(2){grid-row:auto;margin-bottom:12px}
+  .fact{grid-column:1}
+  .route-us{margin:18px -8px 0;padding:26px 18px}
+  .answers{grid-template-columns:1fr;gap:20px}
+  .answers dl div{grid-template-columns:1fr;gap:6px}
+  .cmp-cta{flex-direction:column;align-items:flex-start;padding:26px 22px}
+}
+@media (prefers-reduced-motion:reduce){.trail{transform:none}.mark{opacity:1;transform:translate(-50%,-50%)}.mark-label{opacity:1}}
+
+/* planner */
+.pl-wrap{display:grid;grid-template-columns:1fr 1.6fr;gap:48px;align-items:start}
+.pl-wrap.done{grid-template-columns:1fr}
+.pl-wrap > *{min-width:0}
+.pl-wrap.done .pl-aside{display:none}
+.pl-aside h3{font-size:24px;margin-bottom:14px}
+.pl-aside p{color:var(--ink-2);font-size:17px}
+.pl-aside ul{list-style:none;padding:0;margin:18px 0 0}
+.pl-aside li{padding:10px 0 10px 30px;border-top:1px solid var(--line);position:relative;font-size:16.5px}
+.pl-aside li::before{content:"";position:absolute;left:4px;top:17px;width:10px;height:10px;border-radius:50%;border:2px solid var(--indigo)}
+.pl-top{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+.pl-bar{flex:1;height:6px;border-radius:3px;background:var(--paper-2);overflow:hidden}
+.pl-bar span{display:block;height:100%;background:var(--grad);border-radius:3px;transition:width .3s ease}
+.pl-count{font-size:14.5px;color:var(--ink-3);white-space:nowrap}
+.pl-q{border:0;margin:0;padding:0}
+.pl-q legend{font:600 clamp(24px,2.6vw,30px)/1.2 var(--display);padding:0;margin-bottom:8px}
+.pl-hint{color:var(--ink-2);font-size:16.5px;margin:0 0 4px}
+.pl-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.pl-opt{position:relative;display:block}
+.pl-opt input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.pl-opt span{display:block;height:100%;padding:16px 18px;border:1.5px solid var(--line);border-radius:var(--r-m);background:var(--paper);transition:border-color .15s,background .15s}
+.pl-opt b{display:block;font:600 18px/1.3 var(--display)}
+.pl-opt small{display:block;font-size:15px;color:var(--ink-3);margin-top:3px;line-height:1.4}
+.pl-opt:hover span{border-color:var(--ink-3)}
+.pl-opt input:checked + span{border-color:var(--indigo);background:#fff;box-shadow:0 0 0 3px rgba(67,56,202,.14)}
+.pl-opt input:focus-visible + span{outline:3px solid var(--amber);outline-offset:2px}
+.pl-nav{display:flex;justify-content:space-between;align-items:center;margin-top:22px}
+.pl-back{background:none;border:0;font:600 16px var(--body);color:var(--ink-2);cursor:pointer;padding:8px 0;text-decoration:underline;text-underline-offset:3px}
+.pl-note{font-size:14.5px;color:var(--ink-3)}
+/* the flight plan */
+.pass{border-radius:var(--r-l);overflow:hidden;border:1.5px solid var(--ink);animation:passIn .5s ease}
+@keyframes passIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.pass-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;background:var(--night);color:#fff;padding:26px 30px;background-image:radial-gradient(circle at 100% 0,rgba(20,184,166,.25),transparent 55%)}
+.pass-k{display:block;font-size:14.5px;color:var(--night-ink-2);margin-bottom:4px}
+.pass-route{margin:0;font:600 24px/1.25 var(--display);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.pass-route svg{width:24px;height:24px;color:var(--teal-b)}
+.pass-eta{text-align:right}
+.pass-eta b{font:600 46px/1 var(--display);letter-spacing:-.02em;color:#fff;white-space:nowrap}
+.pass-weeks{list-style:none;margin:0;padding:0;display:flex;border-bottom:1px solid var(--line)}
+.pass-weeks li{flex:calc(var(--w) + .4);padding:16px 18px;border-right:1px dashed var(--line);background:#fff;position:relative}
+.pass-weeks li:last-child{border-right:0}
+.pass-weeks li::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--indigo);opacity:.25}
+.pass-weeks li.go::before{background:var(--teal-b);opacity:1}
+.pass-weeks b{display:block;font:600 16px var(--display);margin-bottom:4px}
+.pass-weeks span{font-size:15px;color:var(--ink-2);line-height:1.4;display:block}
+.pass-warn{margin:0;padding:12px 30px;background:rgba(245,158,11,.1);color:var(--amber-ink);font-size:15.5px}
+.pass-grid{display:grid;grid-template-columns:1fr 1fr;background:#fff}
+.pass-grid section{padding:22px 30px;border-bottom:1px solid var(--line)}
+.pass-grid section:nth-child(odd){border-right:1px solid var(--line)}
+.pass h4{font:600 17px var(--display);margin:0 0 8px;color:var(--indigo)}
+.pass-grid p,.pass-first p{margin:0;color:var(--ink);font-size:16.5px;line-height:1.5}
+.pass-grid ul{margin:0;padding-left:20px;font-size:16.5px}
+.pass-grid li{margin-bottom:3px}
+.pass-small{font-size:14.5px!important;color:var(--ink-3)!important;margin-top:8px!important}
+.pass-first{background:#fff;padding:22px 30px;border-bottom:1px solid var(--line)}
+.pass-match{margin:0;padding:18px 30px;background:var(--paper);font-size:16px;color:var(--ink-2)}
+.pass-cta{display:flex;align-items:center;gap:22px;flex-wrap:wrap;padding:22px 30px;background:#fff}
+@media (max-width:900px){.pl-wrap{grid-template-columns:1fr;gap:28px}.pl-aside ul{display:none}}
+@media (max-width:640px){.btn{white-space:normal;text-align:center}.pass-cta .btn{width:100%;justify-content:center}.pl-opts{grid-template-columns:1fr}.pass-head{flex-direction:column;align-items:flex-start;padding:22px 20px}.pass-eta{text-align:left}.pass-eta b{font-size:38px}.pass-weeks{flex-direction:column}.pass-weeks li{border-right:0;border-bottom:1px dashed var(--line)}.pass-grid{grid-template-columns:1fr}.pass-grid section{padding:18px 20px;border-right:0!important}.pass-first,.pass-match,.pass-cta{padding-left:20px;padding-right:20px}.pass-warn{padding:12px 20px}}
+
+/* team + promises */
+.crew{display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:start}
+.person{background:#fff;border:1px solid var(--line);border-radius:var(--r-l);padding:28px;display:grid;grid-template-columns:132px 1fr;gap:8px 24px;align-items:center}
+.person .bio{grid-column:1 / -1;border-top:1px solid var(--line);margin-top:18px;padding-top:18px}
+.person .bio p{font-size:17px;color:var(--ink-2);margin:0 0 10px}
+.person .bio-promise{color:var(--ink)!important;font-weight:600}
+.person .li{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:15.5px;text-decoration:none;color:#0A66C2}
+.photo img{width:100%;height:100%;object-fit:cover}
+.photo{width:132px;height:132px;border-radius:50%;background:var(--paper-2);display:grid;place-items:center;overflow:hidden}
+.person h3{font-size:24px}
+.person .role{color:var(--ink-3);font-size:16px;margin:4px 0 10px}
+.tz{margin-top:26px;font-size:17px;color:var(--ink-2)}
+.tz b{color:var(--ink)}
+.promises{list-style:none;margin:0;padding:0;counter-reset:none}
+.promises li{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:18px 0;border-bottom:1px solid var(--line)}
+.promises li:first-child{border-top:1.5px solid var(--ink)}
+.promises svg{width:26px;height:26px;margin-top:3px}
+.promises b{display:block;font:600 20px/1.3 var(--display)}
+.promises span{color:var(--ink-2);font-size:17px}
+@media (max-width:900px){.crew{grid-template-columns:1fr;gap:48px}.person{grid-template-columns:96px 1fr;padding:22px}.photo{width:96px;height:96px}}
+
+/* stories + slots */
+.stories{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.story{background:#fff;border:1px solid var(--line);border-radius:var(--r-m);padding:26px}
+.story q{display:block;font:500 20px/1.45 var(--display);quotes:none}
+.story .who{margin-top:18px;font-size:15px;color:var(--ink-3)}
+.slot{border:2px dashed var(--amber);background:rgba(245,158,11,.06);color:var(--amber-ink);border-radius:var(--r-m);padding:18px 20px;font-size:15.5px;line-height:1.5}
+.slot b{display:block;font-size:16px;margin-bottom:2px}
+.night .slot{color:#FCD34D;background:rgba(245,158,11,.08)}
+.photo.slot{padding:8px;font-size:12px;text-align:center;border-radius:50%}
+@media (max-width:900px){.stories{grid-template-columns:1fr}}
+
+/* faq */
+.faq{max-width:860px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq details:first-child{border-top:1.5px solid var(--ink)}
+.faq summary{cursor:pointer;list-style:none;font:600 21px/1.35 var(--display);padding:22px 40px 22px 0;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";position:absolute;right:6px;top:50%;width:12px;height:12px;border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:translateY(-70%) rotate(45deg);transition:transform .2s}
+.faq details[open] summary::after{transform:translateY(-30%) rotate(-135deg)}
+.faq details p{color:var(--ink-2);padding-bottom:12px;max-width:44em}
+
+/* takeoff / booking */
+.takeoff{padding:140px 0 120px;overflow:hidden}
+.takeoff-sky{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.takeoff-sky svg{position:absolute;left:0;top:30px;width:100%;height:220px}
+.takeoff-sky .trail{fill:none;stroke:url(#trailGrad2);stroke-width:2.5;stroke-dasharray:2 10;stroke-linecap:round}
+.book-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:56px;align-items:start;position:relative}
+.agenda{list-style:none;padding:0;margin:28px 0}
+.agenda li{display:grid;grid-template-columns:100px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--night-line)}
+.agenda li span:first-child{font:500 14px/1.6 var(--mono);color:#8EE6D9}
+.agenda li span:last-child{color:var(--night-ink)}
+.reassure{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:16px;color:var(--night-ink-2)}
+.reassure span::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--teal-b);margin-right:8px;vertical-align:middle}
+.cal{background:#fff;border-radius:var(--r-l);padding-bottom:8px;overflow:hidden;color:var(--ink);position:relative}
+.cal .slot{margin:28px;color:var(--amber-ink)}
+.cal-fallback{padding:24px 28px 28px}.cal-fallback p{color:var(--ink-2);font-size:16px}
+.cal-alt{font-size:14px;color:var(--ink-3);padding:0 28px 12px;margin:0}
+.cal-pre{padding:28px 28px 0}
+.cal-pre h3{color:var(--ink);font-size:22px}
+.cal-who{display:flex;gap:14px;align-items:center}.cal-who img{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none}.cal-who p{margin:4px 0 0}
+.cal-pre p{color:var(--ink-2);font-size:16px}
+.cal-stage{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 4px}
+.booked{display:none;padding:48px 36px;text-align:left}
+.booked h3{font-size:34px;color:var(--ink)}
+.booked p{color:var(--ink-2)}
+.cal.is-booked .booked{display:block}.cal.is-booked .cal-body{display:none}
+.big-plane{position:absolute;left:-80px;top:120px;width:64px;opacity:0}
+.takeoff.launch .big-plane{animation:launch 2.2s cubic-bezier(.5,0,.3,1) forwards}
+@keyframes launch{0%{opacity:0;transform:translate(0,0) rotate(-8deg)}10%{opacity:1}100%{opacity:1;transform:translate(110vw,-140px) rotate(-18deg)}}
+@media (max-width:900px){.book-grid{grid-template-columns:1fr}.cal{min-height:0}}
+
+footer{background:var(--night);color:var(--night-ink-2);border-top:1px solid var(--night-line);padding:40px 0 110px;font-size:15px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer .brand{color:#fff}
+
+/* sticky mobile bar */
+.mbar{position:fixed;left:12px;right:12px;bottom:12px;z-index:50;display:none;transform:translateY(120%);transition:transform .3s ease}
+.mbar .btn{width:100%;justify-content:center;box-shadow:0 12px 30px -10px rgba(10,16,36,.5)}
+.mbar.show{transform:none}
+@media (max-width:760px){.mbar{display:block}.sec{padding:84px 0}.hero{padding-top:44px}.wrap{padding:0 20px}body{font-size:17px}.lede{font-size:19px}}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-delay:0s!important;transition:none!important;scroll-behavior:auto!important}
+  .flight .plane{offset-distance:100%}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="pg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4338CA"/><stop offset="1" stop-color="#14B8A6"/></linearGradient>
+    <linearGradient id="trailGrad" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#4338CA" stop-opacity=".2"/><stop offset="1" stop-color="#14B8A6"/></linearGradient>
+    <linearGradient id="trailGrad2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4338CA" stop-opacity=".1"/><stop offset="1" stop-color="#14B8A6"/></linearGradient>
+    <symbol id="plane" viewBox="0 0 24 24"><path d="M2.5 11.2 21 3.5l-5.6 17.2-4.1-6.6-8.8-2.9Z" fill="currentColor"/><path d="m11.3 14.1 9.7-10.6" stroke="#fff" stroke-width="1.2" opacity=".55"/></symbol>
+    <symbol id="logo" viewBox="0 0 40 40"><path d="M5 9a5 5 0 0 1 5-5h12a13 13 0 0 1 0 26h-5v4a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4Z" fill="url(#pg)"/><path d="M13 17.6 29 10.5l-5.2 14.6-3.3-5.3Z" fill="#fff"/><circle cx="10" cy="30" r="1.3" fill="#fff" opacity=".8"/><circle cx="12.6" cy="26.4" r="1.3" fill="#fff" opacity=".8"/><circle cx="15.6" cy="23.4" r="1.3" fill="#fff" opacity=".8"/></symbol>
+    <symbol id="tick" viewBox="0 0 26 26"><circle cx="13" cy="13" r="12" fill="#14B8A6" opacity=".15"/><path d="m8 13.4 3.4 3.4L18.5 9.5" fill="none" stroke="#0F766E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#main" aria-label="Pilotory home"><svg><use href="#logo"/></svg>Pilotory</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#work">Work</a><a href="#how">How we work</a><a href="#compare">Compare</a><a href="#crew">Team</a><a href="#faq">FAQ</a>
+      <a class="btn btn-primary" href="#tools" data-tool="estimate">Plan my MVP</a>
+    </nav>
+  </div>
+</header>
+
+<div class="rail" aria-hidden="true"><div class="rail-fill"></div><svg class="rail-plane" style="color:#4338CA"><use href="#plane"/></svg></div>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero blueprint">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>You bring the idea. We build the product people actually use.</h1>
+      <p class="lede">Pilotory is a product studio for founders who don't code. We help you decide what v1 really needs, then design, build and launch it. The code is in your GitHub from day one.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#tools" data-tool="estimate">Plan my MVP in 2 minutes</a>
+        <a class="btn btn-quiet" href="#work">See what we've built</a>
+      </div>
+      <p class="hero-note">Five questions. No email needed.</p>
+    </div>
+
+    <div class="board" id="board" role="img" aria-label="A rough sketch of a product turns into the live Conch AI app, which Pilotory built.">
+      <div class="board-shot"><img src="img/conch.webp" alt="" width="1000" height="864"></div>
+      <svg class="sketch" viewBox="0 0 560 484" aria-hidden="true">
+        <!-- headline lines -->
+        <path class="sk" pathLength="1" d="M152 32c60-3 190 2 256-1M178 58c50 2 150-2 204 1M206 84c44-2 104 1 148 0"/>
+        <!-- subtitle -->
+        <path class="sk d2" pathLength="1" d="M176 106c70 1 140-1 208 1M196 120c58-1 112 1 168 0"/>
+        <!-- button -->
+        <path class="sk d2" pathLength="1" d="M226 142c34-2 74 0 108 1 5 0 6 13 0 14-36 2-72 1-108-1-5-1-5-13 0-14Z"/>
+        <!-- editor -->
+        <path class="sk d3" pathLength="1" d="M108 192c112-3 232 1 348-1 4 0 5 4 5 8 1 86-1 176 1 262 0 4-3 6-7 6-114 2-232-1-346 1-4 0-6-3-6-7-1-88 2-176-1-263 0-4 2-6 6-6Z"/>
+        <path class="sk d4" pathLength="1" d="M128 236c60 1 120-1 170 1M128 256c56-1 112 1 160 0M128 276c62 1 118-2 170 0M128 296c48 0 100 1 144-1"/>
+        <path class="sk d4" pathLength="1" d="M372 248c0-18 14-30 30-30s30 13 30 30-14 30-30 30-30-12-30-30Z"/>
+        <!-- side cards -->
+        <path class="sk d3" pathLength="1" d="M24 130c18-4 36-6 52-8 3 0 5 2 5 5l8 72c0 3-2 5-5 5-17 2-35 5-52 8-3 0-5-2-5-5l-8-72c0-3 2-5 5-5Z"/>
+        <path class="sk d4" pathLength="1" d="M482 126c16 3 32 6 48 10 3 1 4 3 4 6l-10 62c0 3-3 4-6 4-16-3-32-6-48-10-3-1-4-3-4-6l10-62c1-3 3-4 6-4Z"/>
+        <g class="anno-g">
+          <path class="anno-line" d="M410 30h60v-6"/><text class="anno" x="420" y="16">headline</text>
+          <path class="anno-line" d="M226 162l-46 26"/><text class="anno" x="110" y="204">one clear action</text>
+          <path class="anno-line" d="M432 248h70"/><text class="anno" x="440" y="240">live score</text>
+        </g>
+      </svg>
+      <div class="board-tag"><span class="dot"></span><span class="txt"><span class="a">Your idea, sketched</span><span class="b">Built by us: Conch AI, live</span></span></div>
+      <div class="flight" aria-hidden="true">
+        <svg width="360" height="320" viewBox="0 0 360 320"><path class="trail" d="M20 300 C 120 260, 160 120, 330 40"/></svg>
+        <svg class="plane" viewBox="0 0 24 24" style="color:#14B8A6"><use href="#plane"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap proof">
+    <div class="proof-row">
+      <a class="proof-item" href="https://getconch.ai" target="_blank" rel="noopener"><b>2M+</b><span>academics use Conch AI</span><em>Visit getconch.ai</em></a>
+      <a class="proof-item" href="https://nuvela.ai" target="_blank" rel="noopener"><b>~16,000</b><span>users on Nuvela AI</span><em>Visit nuvela.ai</em></a>
+      <a class="proof-item" href="https://ilumiera.ai" target="_blank" rel="noopener"><b>1,000+</b><span>active students on Ilumiera AI</span><em>Visit ilumiera.ai</em></a>
+      <a class="proof-item" href="https://duskangle.com" target="_blank" rel="noopener"><b>Live</b><span>bookings and payments at Dusk Angle</span><em>Visit duskangle.com</em></a>
+    </div>
+    <p class="proof-foot">Conch's figure is from its public homepage. The other figures were supplied by our clients.</p>
+  </div>
+</section>
+
+<!-- CHOOSER -->
+<section class="chooser">
+  <div class="wrap">
+    <p class="choose-q">Where are you right now?</p>
+    <div class="choices" role="group" aria-label="Your stage">
+      <button class="choice" type="button" data-stage="idea" aria-pressed="false"><b>I have an idea</b><span>Nothing built yet, or a deck and some sketches.</span></button>
+      <button class="choice" type="button" data-stage="ai" aria-pressed="false"><b>I built it with AI tools</b><span>Made in Lovable, Bolt, Cursor or similar, and it's starting to wobble.</span></button>
+      <button class="choice" type="button" data-stage="live" aria-pressed="false"><b>It's live and growing</b><span>Real users, and the product needs to keep up.</span></button>
+    </div>
+    <p class="choice-answer" id="choiceAnswer" aria-live="polite"></p>
+  </div>
+</section>
+
+<!-- TRAPS -->
+<section class="sec" style="padding-top:60px">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Most MVPs fail in one of two ways</h2>
+    </div>
+    <div class="traps">
+      <div class="trap">
+        <h3>Building the wrong product</h3>
+        <p>Founders spend months building every feature they can imagine, launch, and find out nobody needed half of it. Lack of market need is one of the most common reasons startups shut down.</p>
+        <p class="fix">We start by cutting your idea down to the smallest version that proves people want it, and we write that down before any code.</p>
+      </div>
+      <div class="trap">
+        <h3>The vibe-coding cliff</h3>
+        <p>AI tools get a demo running in a weekend. Then real users arrive: logins break, payments fail silently, keys leak, and AI bills climb. The demo can't carry a business.</p>
+        <p class="fix">We keep what works in your prototype, treat it as the spec, and rebuild the parts that have to hold real users and real money.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="sec blueprint" id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>From sketch to takeoff, in four stages</h2>
+      <p class="lede">You see progress every week, and you always know what you're paying for next.</p>
+    </div>
+    <div class="path">
+      <div class="path-line" aria-hidden="true"></div>
+      <div class="stop"><div class="stop-mark">1</div><h3>Discover</h3><p>We learn the business, the user and the one problem v1 must solve, then decide what stays out.</p><div class="get">You receive <b>a one-page product brief</b> with scope, risks and a fixed quote.</div></div>
+      <div class="stop"><div class="stop-mark">2</div><h3>Build</h3><p>Design and development in short cycles, with a working demo you can click every week.</p><div class="get">You receive <b>a weekly demo</b> and the code in <b>your own GitHub</b>.</div></div>
+      <div class="stop"><div class="stop-mark">3</div><h3>Automate</h3><p>Payments, emails, admin tools and AI features wired in, tested, and monitored so nothing fails quietly.</p><div class="get">You receive <b>an admin panel</b> and alerts when something breaks.</div></div>
+      <div class="stop"><div class="stop-mark">4</div><h3>Grow</h3><p>Launch, watch how real people use it, and improve what matters most.</p><div class="get">You receive <b>launch analytics</b> and a plan for v2.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="sec night" id="work">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Products real people use</h2>
+      <p class="lede">Every product here is live. Open it, sign up, try it. That's the best proof we can give you.</p>
+    </div>
+
+    <div class="records">
+      <article class="record">
+        <div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>getconch.ai</span></div><img src="img/conch_editor.webp" alt="Conch AI writing editor with AI-detection score" width="1000" height="487"></div>
+        <div>
+          <p class="strip">AI writing and research platform · Web</p>
+          <h3>Conch AI</h3>
+          <p>Writing, rewriting, research and study tools in one workspace, for students and academics.</p>
+          <ul><li>Chat with uploaded PDFs and slides, with answers tied to source pages</li><li>Turns source material into quizzes, flashcards, mind maps and notes</li><li>Outlines to polished drafts, with citation support</li></ul>
+          <div class="figure"><b>2M+</b><span>academics</span></div>
+          <p class="src">Figure from Conch's public homepage.</p>
+          <a class="live" href="https://getconch.ai" target="_blank" rel="noopener">Open Conch AI</a>
+        </div>
+      </article>
+
+      <article class="record">
+        <div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>nuvela.ai</span></div><img src="img/nuvela.webp" alt="Nuvela AI comparing two NFL quarterbacks" width="1000" height="471"></div>
+        <div>
+          <p class="strip">AI sports research platform · Web</p>
+          <h3>Nuvela AI</h3>
+          <p>NFL and NBA research for fantasy and player-prop decisions. Ask a question in plain English and get an answer grounded in real data.</p>
+          <ul><li>Calculates statistics in code before the AI explains them, so it never invents a number</li><li>Says when data is missing instead of guessing</li><li>Sit-or-start, player props and draft tools</li></ul>
+          <div class="figure"><b>~16,000</b><span>users</span></div>
+          <p class="src">Figure supplied by the client.</p>
+          <a class="live" href="https://nuvela.ai" target="_blank" rel="noopener">Open Nuvela AI</a>
+        </div>
+      </article>
+
+      <article class="record">
+        <div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>ilumiera.ai</span></div><img src="img/ilumiera.webp" alt="Ilumiera AI learning journey and progress dashboard" width="1000" height="486"></div>
+        <div>
+          <p class="strip">AI learning platform · Web</p>
+          <h3>Ilumiera AI</h3>
+          <p>A personal study system with an AI coach. Learners bring PDFs, slides, videos or lectures, and Ilumiera turns them into a day-by-day learning path.</p>
+          <ul><li>Quizzes, flashcards, mind maps, podcasts and simple explainers from any material</li><li>Study planner, streaks and progress tracking</li><li>Handwritten-note scanning</li></ul>
+          <div class="figure"><b>1,000+</b><span>active students, 4.8★ rating</span></div>
+          <p class="src">Figures supplied by the client.</p>
+          <a class="live" href="https://ilumiera.ai" target="_blank" rel="noopener">Open Ilumiera AI</a>
+        </div>
+      </article>
+    </div>
+
+    <div class="more-work">
+      <article class="mini">
+        <div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>duskangle.com</span></div><img src="img/duskangle.webp" alt="Dusk Angle photography studio website" width="1000" height="666"></div>
+        <h3>Dusk Angle</h3>
+        <p>A photography studio's website and admin system: online booking, Razorpay payments with verified webhooks, invoices and staff roles.</p>
+        <a class="live" href="https://duskangle.com" target="_blank" rel="noopener">Open Dusk Angle</a>
+      </article>
+      <article class="mini">
+        <div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>marketplace.sanjeevdev.in</span></div><img src="img/marketplace.webp" alt="Marketplace builder dashboard" width="1000" height="640"></div>
+        <h3>Marketplace</h3>
+        <p>A builder that lets founders launch their own multi-vendor marketplace, with storefront design, seller onboarding and custom domains.</p>
+        <a class="live" href="https://marketplace.sanjeevdev.in" target="_blank" rel="noopener">Open Marketplace</a>
+      </article>
+      <article class="mini">
+        <div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>code.sanjeevdev.in</span></div><img src="img/codecollab.webp" alt="CodeCollab collaborative code editor" width="1000" height="450"></div>
+        <h3>CodeCollab</h3>
+        <p>A browser-based coding classroom: live shared editing, project chat, and JavaScript, Python and Java that run without any setup.</p>
+        <a class="live" href="https://code.sanjeevdev.in" target="_blank" rel="noopener">Open CodeCollab</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="sec blueprint" id="tools">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Try it before you talk to anyone</h2>
+      <p class="lede">Two free tools. You get a useful answer on screen, and nothing is sent anywhere unless you choose to book.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Free tools">
+      <button class="tab" role="tab" id="tab-estimate" aria-controls="panel-estimate" aria-selected="true">Plan my MVP</button>
+      <button class="tab" role="tab" id="tab-check" aria-controls="panel-check" aria-selected="false" tabindex="-1">Check my AI-built app</button>
+    </div>
+
+    <div class="tool" role="tabpanel" id="panel-estimate" aria-labelledby="tab-estimate">
+      <div class="pl-wrap" id="plWrap">
+        <aside class="pl-aside">
+          <h3>Five questions. One flight plan.</h3>
+          <p>Answer as you would to a friend. You'll get a plan for your first version, the same way we'd start it on a real project.</p>
+          <ul><li>When real users could have it</li><li>Who v1 should be for first</li><li>The one journey to build first</li><li>What v1 must prove, and the signal to watch</li><li>What to leave out for now</li></ul>
+        </aside>
+        <div class="planner" id="planner" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div class="tool" role="tabpanel" id="panel-check" aria-labelledby="tab-check" hidden>
+      <div class="tool-grid">
+        <div class="check-list" id="checkList"></div>
+        <div class="result" id="checkResult" aria-live="polite">
+          <p class="result-empty">Answer honestly; "not sure" is a fine answer. Your score and the three risks to fix first appear here.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section class="sec" id="compare">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Every route gets you a demo. Here's what happens after.</h2>
+      <p class="lede">Four ways founders usually build a first product, and where each one tends to stall on the way from idea to real, paying users.</p>
+    </div>
+
+    <div class="routes" id="routes">
+      <div class="stages" aria-hidden="true">
+        <span></span>
+        <div class="stage-row"><i>Idea</i><i>Demo</i><i>Real users</i><i>Taking payments</i><i>Growing</i></div>
+      </div>
+
+      <article class="route" style="--stop:1.55">
+        <header>
+          <h3>AI app builders</h3>
+          <p class="sub">Lovable, Bolt, Cursor and similar</p>
+          <p class="time"><b>A weekend</b> to a demo</p>
+        </header>
+        <div class="track"><span class="trail"></span><span class="mark mark-break" aria-hidden="true"></span><span class="mark-label">Breaks when strangers sign up</span></div>
+        <div class="story">
+          <p class="told">You're told the app is ready to launch.</p>
+          <p>It works perfectly for you. Then real people sign up, and the parts nobody checked fail first: who can see whose data, where the keys are stored, whether payments are really confirmed.</p>
+          <p class="fact"><b>45%</b> of AI-written code contained a security flaw in Veracode's 2025 tests across more than 100 AI models. <a href="https://www.businesswire.com/news/home/20250730694951/en" target="_blank" rel="noopener">Source</a></p>
+          <p class="fact"><b>170</b> of 1,645 Lovable apps scanned in 2025 let anyone read users' personal data. <a href="https://www.superblocks.com/blog/lovable-rls-breach" target="_blank" rel="noopener">Source</a></p>
+        </div>
+      </article>
+
+      <article class="route" style="--stop:2.45">
+        <header>
+          <h3>A low-cost freelancer</h3>
+          <p class="sub">Found on a marketplace, paid by the hour</p>
+          <p class="time"><b>One person</b> holds everything</p>
+        </header>
+        <div class="track lbl-left"><span class="trail"></span><span class="mark mark-stall" aria-hidden="true"></span><span class="mark-label">Stalls when they get busy or move on</span></div>
+        <div class="story">
+          <p class="told">You're told you'll get exactly what you asked for.</p>
+          <p>And you do. Nobody asks whether it's the right thing to build. When something breaks after launch, the only person who understands the code is busy with their next client.</p>
+          <p class="fact"><b>None</b> of the big freelance marketplaces publish project completion rates, so you can't check the odds before you hire. <a href="https://rockingtech.co.uk/blog/the-real-cost-of-a-freelancer-built-mvp-that-needs-rescuing" target="_blank" rel="noopener">Source</a></p>
+        </div>
+      </article>
+
+      <article class="route" style="--stop:2">
+        <header>
+          <h3>A typical agency</h3>
+          <p class="sub">Big team, long discovery, fixed scope</p>
+          <p class="time"><b>3–4 months</b> to launch</p>
+        </header>
+        <div class="track track-slow"><span class="trail"></span><span class="mark mark-clock" aria-hidden="true"></span><span class="mark-label">Launches after most of the runway is spent</span></div>
+        <div class="story">
+          <p class="told">You're told everything on your list will be built properly.</p>
+          <p>It will be, which is the problem. Every feature gets designed, built and tested before a single user tries any of them, and you pay for all of it.</p>
+          <p class="fact"><b>3–4 months</b> is a typical MVP timeline by one large agency's own estimate. <a href="https://netguru.com/blog/mvp-timeline" target="_blank" rel="noopener">Source</a></p>
+          <p class="fact"><b>80%</b> of features in the average software product are rarely or never used. <a href="https://www.pendo.io/resources/the-2019-feature-adoption-report/" target="_blank" rel="noopener">Source</a></p>
+        </div>
+      </article>
+
+      <article class="route route-us" style="--stop:4">
+        <header>
+          <h3><svg width="24" height="24" aria-hidden="true"><use href="#logo"/></svg>Pilotory</h3>
+          <p class="sub">A product team that builds it with you</p>
+          <p class="time"><b>4–5 weeks</b> to real users</p>
+        </header>
+        <div class="track"><span class="trail"></span><svg class="mark mark-plane" viewBox="0 0 24 24" aria-hidden="true"><use href="#plane"/></svg><span class="mark-label">Real users, then growing</span></div>
+        <div class="story">
+          <p class="told">We tell you what to leave out.</p>
+          <p>We cut your idea down to the one thing that proves people want it, and build that properly: secure logins, payments confirmed by the server, backups and alerts. Then we stay and improve what real usage shows.</p>
+          <p class="fact"><b>2M+</b> academics use Conch AI, one of the products we built. <a href="https://getconch.ai" target="_blank" rel="noopener">See it live</a></p>
+        </div>
+      </article>
+    </div>
+
+    <div class="answers">
+      <div class="answers-head">
+        <h3>Five questions to ask anyone before you hire them</h3>
+        <p>Here are our answers. Ask the same of anyone else you're talking to.</p>
+      </div>
+      <dl>
+        <div><dt>Can I use something you built that real people use today?</dt><dd>Yes. <a href="https://getconch.ai" target="_blank" rel="noopener">Conch AI</a>, <a href="https://nuvela.ai" target="_blank" rel="noopener">Nuvela AI</a> and <a href="https://ilumiera.ai" target="_blank" rel="noopener">Ilumiera AI</a> are all live. Sign up and try them.</dd></div>
+        <div><dt>Whose GitHub will the code live in?</dt><dd>Yours, from the first day of the build.</dd></div>
+        <div><dt>What would you cut from my v1?</dt><dd>Most of your feature list. We'll show you exactly what on the first call.</dd></div>
+        <div><dt>What happens when a payment fails at 2am?</dt><dd>Your server checks every payment with the provider, and we get an alert if anything fails.</dd></div>
+        <div><dt>Who exactly will write the code?</dt><dd>The people you meet on the call. No hand-off to a team you've never spoken to.</dd></div>
+      </dl>
+    </div>
+
+    <div class="cmp-cta">
+      <p>Not sure which route is right for you? We'll tell you honestly on a free 30-minute call, even if the answer is "test it yourself first".</p>
+      <a class="btn btn-primary" href="#book">Book a free clarity session</a>
+    </div>
+  </div>
+</section>
+
+<!-- CREW + PROMISES -->
+<section class="sec" id="crew">
+  <div class="wrap crew">
+    <div>
+      <h2 style="margin-bottom:30px">Who you'll talk to</h2>
+      <div class="person" id="person"></div>
+      <p class="tz">We're based in India and work with founders worldwide. <b>We overlap 3–4 working hours with the UK and Europe</b>, and send short video updates for founders in the US, so you never wait a day for an answer.</p>
+    </div>
+    <div>
+      <h2 style="margin-bottom:30px">Our promises</h2>
+      <ul class="promises">
+        <li><svg><use href="#tick"/></svg><div><b>You own the code from day one</b><span>It lives in your GitHub, not ours. The IP is assigned to you in the contract.</span></div></li>
+        <li><svg><use href="#tick"/></svg><div><b>NDA before you share your idea</b><span>Ask for it and we sign it before the first call.</span></div></li>
+        <li><svg><use href="#tick"/></svg><div><b>Pay by milestone, not upfront</b><span>Each payment is tied to something you can see and use.</span></div></li>
+        <li><svg><use href="#tick"/></svg><div><b>Walk away at week 3</b><span>If it isn't working for you, stop with no penalty and keep everything built so far.</span></div></li>
+        <li><svg><use href="#tick"/></svg><div><b>The first call is never a pitch</b><span>You leave with a useful plan whether or not you hire us.</span></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec blueprint" id="faq">
+  <div class="wrap">
+    <div class="sec-head"><h2>Questions founders ask us</h2></div>
+    <div class="faq">
+      <details><summary>How much does it cost, and how long does it take?</summary><p>Every product is different, so we don't publish a price list. Most first versions we build reach real users in 4 to 5 weeks, and the planner above gives you a plan for yours in two minutes. After the clarity session you get a fixed quote in writing, before any work starts.</p></details>
+      <details><summary>Can you fix an app I built with Lovable, Bolt or Cursor?</summary><p>Yes. We review what you have, keep what works, and rebuild what won't survive real users: logins, payments, data and security. Run the "Check my AI-built app" tool above to see where you stand.</p></details>
+      <details><summary>I'm not technical. Will I understand what's going on?</summary><p>That's who we build for. Every week you get a working demo you can click and a short plain-English update. You never need to read code to make a decision.</p></details>
+      <details><summary>Who owns the code and the idea?</summary><p>You do. The code is in your GitHub from day one, the IP is assigned to you in the contract, and we sign an NDA before you share details if you ask.</p></details>
+      <details><summary>You're in India and I'm not. How does that work day to day?</summary><p>We overlap 3–4 working hours with the UK and Europe and keep a regular weekly call. For US founders we send short video updates so decisions never wait a day.</p></details>
+      <details><summary>What happens on the clarity session?</summary><p>Thirty minutes with the person who would lead your build. We talk through your idea, what v1 really needs and the biggest risks. Afterwards you get a one-page brief by email, whether or not you hire us.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- TAKEOFF / BOOK -->
+<section class="night takeoff" id="book">
+  <div class="takeoff-sky" aria-hidden="true">
+    <svg viewBox="0 0 1200 220" preserveAspectRatio="none"><path class="trail" d="M-20 200 C 300 190, 520 120, 760 90 S 1100 40, 1240 20"/></svg>
+    <svg class="big-plane" viewBox="0 0 24 24" style="color:#14B8A6"><use href="#plane"/></svg>
+  </div>
+  <div class="wrap book-grid">
+    <div>
+      <h2>Ready when you are</h2>
+      <p class="lede" style="margin-top:18px">Book a free 30-minute clarity session. Bring your idea, your sketches or your half-built app.</p>
+      <ul class="agenda">
+        <li><span>0–10 min</span><span>You tell us the idea, the user and what success looks like.</span></li>
+        <li><span>10–20 min</span><span>We work out together what v1 needs and what can wait.</span></li>
+        <li><span>20–30 min</span><span>The biggest risks, a realistic timeline and what to do next.</span></li>
+        <li><span>Afterwards</span><span>A one-page brief in your inbox within 24 hours.</span></li>
+      </ul>
+      <div class="reassure"><span>No pitch, no obligation</span><span>Times shown in your time zone</span><span>NDA on request</span></div>
+    </div>
+    <div class="cal" id="cal">
+      <div class="cal-body">
+        <div class="cal-pre">
+          <div class="cal-who"><img src="img/aarif.webp" alt="" width="56" height="56"><div><h3>Pick a time with Aarif</h3><p>30 minutes on video. Your stage helps him prepare; it's optional.</p></div></div>
+          <div class="cal-stage opts" id="calStage"></div>
+        </div>
+        <div id="calMount"></div>
+      </div>
+      <div class="booked">
+        <h3>You're booked. Your idea is cleared for takeoff.</h3>
+        <p>Check your inbox for the invite. To get the most from 30 minutes, have ready:</p>
+        <ul style="color:var(--ink-2)"><li>A sentence on who the product is for</li><li>Any sketches, docs or links to what you've built</li><li>Your ideal launch date</li></ul>
+        <p style="margin-top:18px">While you wait, see how we built <a href="#work">Nuvela AI</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#main"><svg width="28" height="28"><use href="#logo"/></svg>Pilotory</a>
+    <span>Product studio for founders who don't code. Based in India, working worldwide.</span>
+  </div>
+</footer>
+
+<div class="mbar" id="mbar"><a class="btn btn-primary" href="#tools" data-tool="estimate">Plan my MVP in 2 minutes</a></div>
+
+<script>
+/* ================= CONFIG: edit before launch ================= */
+const CONFIG = {
+  // Your Calendly event link, e.g. "https://calendly.com/yourname/clarity-session"
+  calendlyUrl: "https://calendly.com/aarif-mohammad/clarity-session-with-aarif",
+  // Show dashed placeholders for content that is still missing. Set false for launch.
+  showSlots: false,
+  // Who founders will meet on the call
+  lead: {
+    name: "Aarif Mohammad",
+    role: "Founder, Pilotory",
+    photo: "img/aarif.webp",
+    linkedin: "https://www.linkedin.com/in/aarif-mohammad23/",
+    bio: "Aarif leads the product and engineering behind the products on this page, from Conch AI to Nuvela AI. He works with founders who don't code, and his job is to tell you what your first version really needs, then make sure it holds up when real users arrive.",
+    promise: "He's the person on your call, and the person accountable for your build."
+  }
+};
+/* ============================================================== */
+
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const state = { stage: "", est: {}, check: {} };
+
+/* hero: swap the tag when the screenshot lands */
+setTimeout(() => $("#board").classList.add("done"), matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 2600);
+
+/* flight rail + mobile bar */
+const fill = $(".rail-fill"), plane = $(".rail-plane"), mbar = $("#mbar");
+function onScroll() {
+  const h = document.documentElement, p = h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight);
+  const railH = fill.parentElement.clientHeight;
+  fill.style.height = (p * railH) + "px"; plane.style.top = (p * railH) + "px";
+  const bookTop = $("#book").getBoundingClientRect().top;
+  const t = $("#tools").getBoundingClientRect();
+  const inTools = t.top < innerHeight * 0.7 && t.bottom > innerHeight * 0.3;
+  mbar.classList.toggle("show", p > 0.12 && bookTop > innerHeight * 0.6 && !inTools);
+}
+addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+/* flight paths reveal */
+const routeEls = $$(".route");
+if ("IntersectionObserver" in window) { const io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { x.target.classList.add("in"); io.unobserve(x.target); } }), { rootMargin: "0px 0px -15% 0px" }); routeEls.forEach(r => io.observe(r)); } else routeEls.forEach(r => r.classList.add("in"));
+
+/* stage chooser */
+const answers = {
+  idea: `Start with the <a href="#tools" data-tool="estimate">MVP planner</a>. It shows what v1 needs and what can wait.`,
+  ai: `Start with the <a href="#tools" data-tool="check">AI-built app check</a>. Ten questions show what will break first.`,
+  live: `See how we scaled <a href="#work">Conch AI and Nuvela AI</a>, then <a href="#book">book a session</a> about what's next.`
+};
+$$(".choice").forEach(b => b.addEventListener("click", () => {
+  $$(".choice").forEach(x => x.setAttribute("aria-pressed", x === b));
+  state.stage = b.dataset.stage;
+  $("#choiceAnswer").innerHTML = answers[state.stage];
+  if (state.stage === "ai") showTool("check"); else showTool("estimate");
+  renderStage();
+}));
+
+/* tabs */
+function showTool(name) {
+  ["estimate", "check"].forEach(n => {
+    const on = n === name;
+    $("#tab-" + n).setAttribute("aria-selected", on); $("#tab-" + n).tabIndex = on ? 0 : -1;
+    $("#panel-" + n).hidden = !on;
+  });
+}
+$$(".tab").forEach(t => t.addEventListener("click", () => showTool(t.id.replace("tab-", ""))));
+$(".tabs").addEventListener("keydown", e => {
+  if (!["ArrowLeft", "ArrowRight"].includes(e.key)) return;
+  const next = $("#tab-estimate").getAttribute("aria-selected") === "true" ? "check" : "estimate";
+  showTool(next); $("#tab-" + next).focus();
+});
+document.addEventListener("click", e => { const a = e.target.closest("[data-tool]"); if (a) showTool(a.dataset.tool); });
+
+/* ---------- MVP planner ---------- */
+const PQ = [
+  { id: "type", q: "What are you building?", o: [
+    ["market", "A marketplace", "Buyers and sellers, or clients and pros"],
+    ["saas", "Software for businesses", "A tool teams pay for"],
+    ["ai", "An AI assistant", "Answers, writes or analyses for people"],
+    ["consumer", "A consumer app", "Something people use in daily life"],
+    ["booking", "A booking or service business", "Customers book and pay you"],
+    ["internal", "A tool for my own team", "Replaces spreadsheets or manual work"] ] },
+  { id: "stage", q: "Where are you today?", o: [
+    ["idea", "Just the idea", "Notes, a deck, maybe some sketches"],
+    ["talked", "I've talked to potential users", "I know who has the problem"],
+    ["waitlist", "I have a waitlist or early users", "People are already asking for it"],
+    ["prototype", "I built a prototype with AI tools", "Lovable, Bolt, Cursor or similar"] ] },
+  { id: "prove", q: "What does v1 need to prove?", hint: "This is the belief your whole idea rests on. If it's wrong, nothing else matters.", o: [
+    ["want", "People want it", "They sign up and come back"],
+    ["pay", "People will pay for it", "Money, not just compliments"],
+    ["save", "It saves real time or money", "Measurably better than today"],
+    ["trust", "The AI can be trusted", "Answers people can rely on"],
+    ["sides", "Both sides will show up", "Enough supply for the first demand"] ] },
+  { id: "pay", q: "How will it make money?", o: [
+    ["subs", "Monthly subscription", ""], ["once", "One-off payments", ""], ["fee", "A fee on each transaction", ""], ["later", "Free for now", "Prove usage first"] ] },
+  { id: "when", q: "When do you want real users?", o: [
+    ["month", "Within a month", ""], ["quarter", "In 2–3 months", ""], ["flex", "No fixed date", ""] ] }
+];
+
+const PLAN = {
+  who: {
+    market: "One city or one niche, with enough sellers lined up by hand that the first buyers find what they came for.",
+    saas: "One type of business with one painful job. Ten teams who have that problem this month beat a thousand who might someday.",
+    ai: "One group with one recurring question they need answered well, and who will notice when the answer is wrong.",
+    consumer: "One community you can reach directly, with a reason to come back tomorrow, not just try it today.",
+    booking: "Your existing customers, or the ones you already talk to, booking the one service that matters most.",
+    internal: "One team as the pilot, doing the one task that eats the most hours each week."
+  },
+  journey: {
+    market: "A buyer finds the right seller, books and pays, and the seller gets paid. Everything else can wait.",
+    saas: "A new team signs up, brings in their own data and sees a useful result in their first session.",
+    ai: "A user asks a real question and gets an answer they can check against its source, or an honest \"I don't know\".",
+    consumer: "A new user gets the core value in their first few minutes and has a clear reason to return.",
+    booking: "A customer picks a time, pays and gets a confirmation, and you see it all in one place.",
+    internal: "Your team finishes the task in the new tool, faster than the old way, without asking for help."
+  },
+  cut: {
+    market: ["Reviews and ratings", "Chat between buyers and sellers", "Seller analytics"],
+    saas: ["Team roles and permissions", "A second or third integration", "Custom reports"],
+    ai: ["AI that acts on its own", "Voice", "Training a custom model"],
+    consumer: ["Social features and feeds", "Points and badges", "A native app, if the web works on phones"],
+    booking: ["Loyalty programmes", "Multiple locations", "Staff scheduling"],
+    internal: ["Dashboards nobody asked for", "Edge cases that happen once a month", "Connecting every other tool"]
+  },
+  signal: {
+    want: "How many people come back in their second week without being reminded.",
+    pay: "How many people pay full price, without a discount or a personal favour.",
+    save: "How long the task takes before and after, measured with real users.",
+    trust: "How often users accept the answer without checking it elsewhere, and how often it's wrong.",
+    sides: "How many first requests get a match, and how fast."
+  },
+  first: {
+    idea: "We'll help you find 10–20 people with the problem before launch day, so v1 goes to people who are waiting for it.",
+    talked: "The people you've already spoken to become your first users. We'll make it easy to invite them personally.",
+    waitlist: "Your waitlist gets access in small batches, so we can fix what we learn before the next group arrives.",
+    prototype: "We start by checking what you've built. We keep what works and rebuild what won't survive real users."
+  },
+  match: {
+    market: ["Marketplace", "a builder for multi-vendor marketplaces with storefronts and seller onboarding"],
+    saas: ["Nuvela AI", "a paid research product with its own operations dashboard"],
+    ai: ["Conch AI", "AI that answers from people's own documents, used by 2M+ academics"],
+    consumer: ["Ilumiera AI", "a study app with streaks and progress that gives people a reason to return"],
+    booking: ["Dusk Angle", "online booking with Razorpay payments confirmed by the server"],
+    internal: ["CodeCollab", "a focused tool built around one core workflow"]
+  }
+};
+
+const planEl = $("#planner");
+let step = 0;
+function renderStep() {
+  if (step >= PQ.length) return renderPlan();
+  $("#plWrap").classList.remove("done");
+  const q = PQ[step], chosen = state.est[q.id];
+  planEl.innerHTML = `
+    <div class="pl-top">
+      <div class="pl-bar" role="progressbar" aria-valuemin="1" aria-valuemax="${PQ.length}" aria-valuenow="${step + 1}" aria-label="Question ${step + 1} of ${PQ.length}"><span style="width:${(step + 1) / PQ.length * 100}%"></span></div>
+      <span class="pl-count">${step + 1} of ${PQ.length}</span>
+    </div>
+    <fieldset class="pl-q">
+      <legend>${q.q}</legend>
+      ${q.hint ? `<p class="pl-hint">${q.hint}</p>` : ""}
+      <div class="pl-opts">${q.o.map(([v, l, d]) => `
+        <label class="pl-opt"><input type="radio" name="${q.id}" value="${v}" ${chosen === v ? "checked" : ""}><span><b>${l}</b>${d ? `<small>${d}</small>` : ""}</span></label>`).join("")}
+      </div>
+    </fieldset>
+    <div class="pl-nav">${step ? `<button type="button" class="pl-back">Back</button>` : "<span></span>"}<span class="pl-note">No email needed</span></div>`;
+  const first = planEl.querySelector("input:checked") || planEl.querySelector("input");
+  if (planEl.dataset.focus) first.focus({ preventScroll: true });
+  planEl.querySelectorAll("input").forEach(i => i.addEventListener("change", () => {
+    state.est[q.id] = i.value;
+    setTimeout(() => { step++; planEl.dataset.focus = 1; renderStep(); }, 220);
+  }));
+  const back = planEl.querySelector(".pl-back");
+  if (back) back.addEventListener("click", () => { step--; planEl.dataset.focus = 1; renderStep(); });
+}
+
+function renderPlan() {
+  $("#plWrap").classList.add("done");
+  const e = state.est;
+  let wk = 4 + (e.type === "market" || e.prove === "sides" ? 1 : 0) + (e.type === "ai" || e.prove === "trust" ? 1 : 0) - (e.stage === "prototype" || e.stage === "waitlist" ? 1 : 0);
+  wk = Math.max(3, Math.min(5, wk));
+  const build = wk - 2;
+  const pick = (id) => PQ.find(x => x.id === id).o.find(o => o[0] === e[id])[1];
+  const m = PLAN.match[e.type];
+  const payNote = { subs: "Subscriptions billed automatically", once: "Checkout with Stripe or Razorpay", fee: "Payments split between you and the seller", later: "Free, with usage tracked so you can price it later" }[e.pay];
+  const whenNote = e.when === "month" && wk > 4 ? `To hit your one-month target we'd cut v1 even further. We'll show you how on the call.` : "";
+  state.summary = `${pick("type")} | ${pick("stage")} | prove: ${pick("prove")} | ${wk} weeks`;
+  const weeks = [`<li style="--w:1"><b>Week 1</b><span>Who it's for, what it must prove, and a clickable design you can show people</span></li>`,
+    `<li style="--w:${build}"><b>Week${build > 1 ? "s" : ""} 2${build > 1 ? "–" + (build + 1) : ""}</b><span>Build the one journey, with a working demo every week</span></li>`,
+    `<li style="--w:1" class="go"><b>Week ${wk}</b><span>Launch to your first users and watch what they do</span></li>`].join("");
+  planEl.innerHTML = `
+    <div class="pass">
+      <div class="pass-head">
+        <div><span class="pass-k">Your flight plan</span><p class="pass-route">${pick("type")}<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#plane"/></svg>real users</p></div>
+        <div class="pass-eta"><span class="pass-k">Real users in</span><b>${wk} weeks</b></div>
+      </div>
+      <ol class="pass-weeks">${weeks}</ol>
+      ${whenNote ? `<p class="pass-warn">${whenNote}</p>` : ""}
+      <div class="pass-grid">
+        <section><h4>Who v1 is for</h4><p>${PLAN.who[e.type]}</p></section>
+        <section><h4>The one journey we build first</h4><p>${PLAN.journey[e.type]}</p><p class="pass-small">${payNote}.</p></section>
+        <section><h4>What v1 must prove</h4><p><b>${pick("prove")}.</b> The signal to watch: ${PLAN.signal[e.prove].charAt(0).toLowerCase() + PLAN.signal[e.prove].slice(1)}</p><p class="pass-small">We'll agree the exact target with you before the build starts.</p></section>
+        <section><h4>Leave out of v1</h4><ul>${PLAN.cut[e.type].map(c => `<li>${c}</li>`).join("")}</ul><p class="pass-small">Add them when real users ask for them.</p></section>
+      </div>
+      <div class="pass-first"><h4>Your first users</h4><p>${PLAN.first[e.stage]}</p></div>
+      <p class="pass-match">Closest product we've built: <b>${m[0]}</b>, ${m[1]}.</p>
+      <div class="pass-cta">
+        <a class="btn btn-primary" href="#book" data-from="estimate">Turn this into a real plan on a free call</a>
+        <button type="button" class="pl-back pl-restart">Start again</button>
+      </div>
+    </div>`;
+  planEl.querySelector(".pl-restart").addEventListener("click", () => { step = 0; state.est = {}; planEl.dataset.focus = 1; renderStep(); });
+  planEl.querySelector(".pass").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "nearest" });
+}
+renderStep();
+
+/* ---------- AI-built app check ---------- */
+const C = [
+  ["auth", "Each user can only see their own data, and admins have separate access.", "Users may see each other's data", "One wrong query can expose every customer's records. This is the most common failure in AI-built apps."],
+  ["secrets", "API keys and passwords are kept on the server, not in the app's code.", "Your keys may be public", "Keys shipped in front-end code can be copied in minutes and used to run up your bills."],
+  ["pay", "Payments are confirmed by your server (webhooks), not just by the browser.", "Payments can fail silently", "Without verified webhooks, people can get access without paying, or pay and get nothing."],
+  ["backup", "Your database is backed up automatically and you've tested a restore.", "One mistake could wipe your data", "Without tested backups, a bad migration or deleted table is permanent."],
+  ["errors", "You get an alert when something breaks for a user.", "You find out about bugs from angry users", "Error monitoring tells you about failures before customers leave."],
+  ["limits", "Sign-ups, logins and AI calls are rate-limited.", "Bots can drain your AI budget", "Without limits, one script can create thousands of accounts or AI calls overnight."],
+  ["staging", "You test changes somewhere before real users see them.", "Every change is tested on real customers", "A separate test environment stops one edit from breaking the live app."],
+  ["cost", "You know what each user costs you in AI and hosting fees.", "AI costs could outgrow revenue", "AI usage that grows with users can quietly cost more than they pay."],
+  ["repo", "The code is in a GitHub account you own and control.", "You may not own your product", "If the code lives in a tool or someone else's account, you can be locked out."],
+  ["load", "The app has been tested with many users at once.", "Launch day could take it down", "Apps that work for ten users often slow down or crash at a few hundred."]
+];
+$("#checkList").innerHTML = C.map(([id, q]) => `<div class="cq"><p>${q}</p><div class="opts" role="radiogroup" aria-label="${q}">${[["y", "Yes"], ["n", "No"], ["u", "Not sure"]].map(([v, l]) => `<label class="opt"><input type="radio" name="c-${id}" value="${v}"><span>${l}</span></label>`).join("")}</div></div>`).join("");
+$("#checkList").addEventListener("change", e => { state.check[e.target.name.slice(2)] = e.target.value; renderCheck(); });
+
+function renderCheck() {
+  const n = Object.keys(state.check).length, el = $("#checkResult");
+  if (n < 4) { el.innerHTML = `<p class="result-empty">${4 - n} more answer${4 - n > 1 ? "s" : ""} and your score appears. ${C.length} questions in total.</p>`; return; }
+  const yes = C.filter(c => state.check[c[0]] === "y").length;
+  const risks = C.filter(c => state.check[c[0]] && state.check[c[0]] !== "y");
+  const unanswered = C.length - n;
+  const pct = yes / n;
+  const [col, word, line] = pct >= .8 ? ["#14B8A6", "Ready for real users", "Strong foundations. A quick review before you scale is still worth it."]
+    : pct >= .5 ? ["#F59E0B", "Some risky gaps", "It works, but a few gaps could hurt you as users arrive."]
+    : ["#E5484D", "Not safe for real users yet", "These gaps tend to surface at the worst moment: launch day or the first payment dispute."];
+  state.summary = `AI-built app check: ${yes}/${n} yes; ${word}`;
+  el.innerHTML = `
+    <h3>Your app today</h3>
+    <div class="score"><span class="light" style="background:${col}"></span><p class="big" style="font-size:34px;margin:0">${word}</p></div>
+    <p class="small">${yes} of ${n} in place${unanswered ? `, ${unanswered} still to answer` : ""}. ${line}</p>
+    ${risks.length ? `<h3 style="margin-top:18px">Fix these first</h3><ul class="risks">${risks.slice(0, 3).map(r => `<li><b>${r[2]}</b>${r[3]}</li>`).join("")}</ul>` : ""}
+    <a class="btn btn-ink" href="#book" data-from="check">Book a free 20-minute risk walkthrough</a>`;
+}
+
+/* ---------- lead ---------- */
+
+const L = CONFIG.lead;
+$("#person").innerHTML = `
+  ${L.photo ? `<div class="photo"><img src="${L.photo}" alt="${L.name}" width="160" height="160"></div>` : `<div class="photo ${CONFIG.showSlots ? "slot" : ""}">${CONFIG.showSlots ? "Add your photo" : ""}</div>`}
+  <div><h3>${L.name || "The Pilotory team"}</h3>
+  <p class="role">${L.role}</p>
+  ${L.linkedin ? `<a class="li" href="${L.linkedin}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.8v1.5h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4v-11Z"/></svg>LinkedIn</a>` : ""}</div>
+  ${L.bio ? `<div class="bio"><p>${L.bio}</p><p class="bio-promise">${L.promise}</p></div>` : ""}`;
+
+/* ---------- booking ---------- */
+const stageNames = { idea: "Just an idea", ai: "Built with AI tools", live: "Live and growing" };
+$("#calStage").innerHTML = Object.entries(stageNames).map(([v, l]) => `<label class="opt"><input type="radio" name="calstage" value="${v}"><span>${l}</span></label>`).join("");
+$("#calStage").addEventListener("change", e => { state.stage = e.target.value; mountCalendly(); });
+function renderStage() { const r = $(`#calStage input[value="${state.stage}"]`); if (r) r.checked = true; mountCalendly(); }
+document.addEventListener("click", e => { if (e.target.closest("[data-from]")) setTimeout(mountCalendly, 0); });
+
+function calendlyLink() {
+  const u = new URL(CONFIG.calendlyUrl);
+  const notes = [stageNames[state.stage], state.summary].filter(Boolean).join(" | ");
+  if (notes) u.searchParams.set("a1", notes);
+  const qs = new URLSearchParams(location.search);
+  ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].forEach(k => qs.get(k) && u.searchParams.set(k, qs.get(k)));
+  u.searchParams.set("hide_gdpr_banner", "1");
+  return u.toString();
+}
+let calLoaded = false, calFailed = false, calTimer;
+function calFallback() {
+  calFailed = true;
+  $("#calMount").innerHTML = `<div class="cal-fallback"><p>Pick any weekday or Saturday slot. Times show in your own time zone.</p><a class="btn btn-primary" href="${calendlyLink()}" target="_blank" rel="noopener">Open the booking calendar</a></div>`;
+}
+function mountCalendly() {
+  const m = $("#calMount");
+  if (!CONFIG.calendlyUrl) { m.innerHTML = `<p style="padding:28px">Booking opens soon.</p>`; return; }
+  if (calFailed) return calFallback();
+  m.innerHTML = `<div class="calendly-inline-widget" style="min-width:300px;height:700px"></div><p class="cal-alt">Calendar not loading? <a href="${calendlyLink()}" target="_blank" rel="noopener">Open it in a new tab</a>.</p>`;
+  const init = () => window.Calendly && Calendly.initInlineWidget({ url: calendlyLink(), parentElement: $(".calendly-inline-widget") });
+  clearTimeout(calTimer);
+  calTimer = setTimeout(() => { if (!$(".calendly-inline-widget iframe")) calFallback(); }, 5000);
+  if (window.Calendly) return init();
+  if (calLoaded) return;
+  calLoaded = true;
+  const s = document.createElement("script"); s.src = "https://assets.calendly.com/assets/external/widget.js"; s.async = true;
+  s.onload = init; s.onerror = calFallback; document.head.appendChild(s);
+}
+mountCalendly();
+
+addEventListener("message", e => {
+  if (e.origin !== "https://calendly.com" || !e.data || e.data.event !== "calendly.event_scheduled") return;
+  $("#cal").classList.add("is-booked"); $(".takeoff").classList.add("launch");
+  // Analytics hooks: fire your Meta Pixel / GA4 events here, e.g.
+  // window.fbq && fbq("track", "Schedule"); window.gtag && gtag("event", "book_call");
+});
+</script>
+</body>
+</html>
