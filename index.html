@@ -220,6 +220,55 @@ section{position:relative}
 .risks{list-style:none;padding:0;margin:0}
 .risks li{padding:12px 0;border-top:1px solid var(--line);font-size:16px;color:var(--ink-2)}
 .risks b{color:var(--ink);display:block;font-size:17px}
+/* pre-flight check */
+.ck-facts{margin-top:22px;display:grid;gap:12px}
+.ck-facts p{margin:0;padding:14px 16px;background:var(--paper);border-radius:var(--r-m);font-size:15.5px;color:var(--ink-2);line-height:1.45}
+.ck-facts b{display:block;font:600 26px/1.1 var(--display);color:var(--ink);letter-spacing:-.01em;margin-bottom:2px}
+.ck-facts a{font-size:14px}
+.ck-area{display:inline-flex;align-items:center;gap:8px;font:600 14.5px var(--body);color:var(--indigo);margin:0 0 10px}
+.ck-area::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--grad)}
+.ck-how{background:var(--paper);border-radius:var(--r-m);padding:16px 20px;margin:16px 0 4px}
+.ck-how h4{font:600 15.5px var(--body);margin:0 0 6px;color:var(--ink)}
+.ck-how ol{margin:0;padding-left:20px;font-size:16px;color:var(--ink-2);line-height:1.5}
+.ck-how li{margin:3px 0}
+.ck-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-top:16px}
+.ck-opts .pl-opt span{padding:14px 16px}
+.ck-opts .pl-opt b{font-size:17px}
+.pl-opt[data-tone="g"] input:checked + span{border-color:var(--teal-b);box-shadow:0 0 0 3px rgba(20,184,166,.18)}
+.pl-opt[data-tone="b"] input:checked + span{border-color:#E5484D;box-shadow:0 0 0 3px rgba(229,72,77,.15)}
+.pl-opt[data-tone="u"] input:checked + span{border-color:var(--amber);box-shadow:0 0 0 3px rgba(245,158,11,.18)}
+.ck-why{margin:18px 0 0;padding-top:14px;border-top:1px solid var(--line);font-size:15.5px;color:var(--ink-2);line-height:1.5}
+.ck-why b{color:var(--ink)}
+.ck-why a{white-space:nowrap}
+.ck-areas{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-bottom:1px solid var(--line)}
+.ck-areas div{padding:18px 22px;border-right:1px solid var(--line)}
+.ck-areas div:last-child{border-right:0}
+.ck-areas h5{font:600 15.5px/1.3 var(--display);margin:0 0 6px;color:var(--ink)}
+.ck-st{font:600 14.5px var(--body)}
+.ck-st.g{color:var(--teal)}.ck-st.u{color:var(--amber-ink)}.ck-st.b{color:#C2353A}
+.ck-segs{display:flex;gap:4px;margin-top:10px}
+.ck-segs i{flex:1;height:6px;border-radius:3px;background:var(--paper-2)}
+.ck-segs i.g{background:var(--teal-b)}.ck-segs i.u{background:var(--amber)}.ck-segs i.b{background:#E5484D}
+.ck-fixes{background:#fff;padding:24px 30px 8px}
+.ck-fixes > p{margin:0 0 6px;color:var(--ink-2);font-size:16px}
+.ck-fixes ol{list-style:none;margin:0;padding:0;counter-reset:fix}
+.ck-fixes li{counter-increment:fix;display:grid;grid-template-columns:34px 1fr;gap:0 14px;padding:18px 0;border-top:1px solid var(--line)}
+.ck-fixes li::before{content:counter(fix);width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:600 15px var(--display);color:#fff;background:var(--ink)}
+.ck-fixes li.b::before{background:#E5484D}.ck-fixes li.u::before{background:var(--amber);color:var(--ink)}
+.ck-fixes h5{font:600 18px/1.3 var(--display);margin:3px 0 4px;color:var(--ink)}
+.ck-fixes li p{margin:0;font-size:16px;color:var(--ink-2);line-height:1.5}
+.ck-fix-act{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;margin-top:12px}
+.ck-copy{font:600 15px var(--body);padding:10px 16px;border-radius:999px;border:1.5px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer}
+.ck-copy:hover{background:var(--paper)}
+.ck-copy.done{background:var(--ink);color:#fff}
+.ck-fix-act details{font-size:15px;color:var(--ink-2)}
+.ck-fix-act summary{cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.ck-prompt{margin:10px 0 0;padding:14px 16px;background:var(--paper);border-radius:var(--r-m);font:15px/1.55 var(--body);color:var(--ink);white-space:pre-wrap}
+.ck-clear{margin:0;padding:18px 0 22px;border-top:1px solid var(--line);font-size:16.5px;color:var(--ink-2)}
+.ck-note{margin:0;padding:18px 30px;background:var(--paper);font-size:16px;color:var(--ink-2)}
+#checker,.pass{scroll-margin-top:92px}
+@media (max-width:900px){.ck-aside .ck-facts{grid-template-columns:1fr 1fr}#ckWrap.started .ck-aside{display:none}}
+@media (max-width:640px){.ck-areas{grid-template-columns:1fr 1fr}.ck-areas div{padding:16px 18px;border-bottom:1px solid var(--line)}.ck-areas div:nth-child(2n){border-right:0}.ck-areas div:nth-child(n+3){border-bottom:0}.ck-fixes{padding:20px 20px 4px}.ck-note{padding:16px 20px}.ck-aside .ck-facts{grid-template-columns:1fr}}
 @media (max-width:560px){.tabs{flex-wrap:nowrap;gap:4px}.tab{font-size:15px;padding:12px 12px}.split{grid-template-columns:1fr}}
 @media (max-width:900px){.tool{padding:26px 20px;border-radius:0 var(--r-m) var(--r-m) var(--r-m)}.tool-grid{grid-template-columns:1fr}.result{position:static}.cq{grid-template-columns:1fr}}
 
@@ -679,11 +728,17 @@ footer .foot-meta{display:flex;flex-direction:column;gap:14px}
     </div>
 
     <div class="tool" role="tabpanel" id="panel-check" aria-labelledby="tab-check" hidden>
-      <div class="tool-grid">
-        <div class="check-list" id="checkList"></div>
-        <div class="result" id="checkResult" aria-live="polite">
-          <p class="result-empty">Answer honestly; "not sure" is a fine answer. Your score and the three risks to fix first appear here.</p>
-        </div>
+      <div class="pl-wrap" id="ckWrap">
+        <aside class="pl-aside ck-aside">
+          <h3>Is your AI-built app ready for real users?</h3>
+          <p>Ten plain-English questions for apps made with Lovable, Bolt, Cursor, Replit or similar. Each one comes with a one-minute test you can do yourself. No code needed.</p>
+          <ul><li>Your users' data</li><li>Money and bills</li><li>Day-to-day running</li><li>When something goes wrong</li></ul>
+          <div class="ck-facts">
+            <p><b>1 in 5</b> sites built on AI app builders leaked at least one secret key, in a scan of about 130,000 sites. <a href="https://redhuntlabs.com/blog/echoes-of-ai-exposure-thousands-of-secrets-leaking-through-vibe-coded-sites-wave-15-project-resonance/" target="_blank" rel="noopener">Source</a></p>
+            <p><b>2,000+</b> security holes were found across 5,600 live AI-built apps. <a href="https://escape.tech/blog/methodology-how-we-discovered-vulnerabilities-apps-built-with-vibe-coding/" target="_blank" rel="noopener">Source</a></p>
+          </div>
+        </aside>
+        <div class="checker" id="checker" aria-live="polite"></div>
       </div>
     </div>
   </div>
@@ -1090,39 +1145,190 @@ function renderPlan() {
 renderStep();
 
 /* ---------- AI-built app check ---------- */
-const C = [
-  ["auth", "Each user can only see their own data, and admins have separate access.", "Users may see each other's data", "One wrong query can expose every customer's records. This is the most common failure in AI-built apps."],
-  ["secrets", "API keys and passwords are kept on the server, not in the app's code.", "Your keys may be public", "Keys shipped in front-end code can be copied in minutes and used to run up your bills."],
-  ["pay", "Payments are confirmed by your server (webhooks), not just by the browser.", "Payments can fail silently", "Without verified webhooks, people can get access without paying, or pay and get nothing."],
-  ["backup", "Your database is backed up automatically and you've tested a restore.", "One mistake could wipe your data", "Without tested backups, a bad migration or deleted table is permanent."],
-  ["errors", "You get an alert when something breaks for a user.", "You find out about bugs from angry users", "Error monitoring tells you about failures before customers leave."],
-  ["limits", "Sign-ups, logins and AI calls are rate-limited.", "Bots can drain your AI budget", "Without limits, one script can create thousands of accounts or AI calls overnight."],
-  ["staging", "You test changes somewhere before real users see them.", "Every change is tested on real customers", "A separate test environment stops one edit from breaking the live app."],
-  ["cost", "You know what each user costs you in AI and hosting fees.", "AI costs could outgrow revenue", "AI usage that grows with users can quietly cost more than they pay."],
-  ["repo", "The code is in a GitHub account you own and control.", "You may not own your product", "If the code lives in a tool or someone else's account, you can be locked out."],
-  ["load", "The app has been tested with many users at once.", "Launch day could take it down", "Apps that work for ten users often slow down or crash at a few hundred."]
+const CK_AREAS = [["data", "Your users' data"], ["money", "Money and bills"], ["run", "Day-to-day running"], ["net", "When something goes wrong"]];
+const CK = [
+  { id: "others", area: "data", sev: 3,
+    q: "Can one user ever see another user's information?",
+    how: ["Make two test accounts with different emails.", "With the first, add something private: a note, an order or a profile detail.", "Log in as the second and look everywhere, including lists and search."],
+    o: [["g", "No, I tested it", "The second account saw nothing from the first."], ["b", "Yes, some of it shows", "Even another user's name or email counts."], ["u", "I haven't tested this", "Most founders haven't. It takes five minutes."]],
+    why: "It's the most common hole in AI-built apps. A 2025 scan of 1,645 Lovable apps found 170 that let anyone read users' personal data.",
+    src: "https://www.superblocks.com/blog/lovable-rls-breach",
+    risk: "Customers may be able to see each other's data",
+    body: "The database rules that keep each account private are often switched off by default. Fix this before anyone else signs up.",
+    prompt: "Turn on Row Level Security for every table that stores user data. Add policies so a signed-in user can only read, add, change and delete their own rows. Do not use any policy that lets everyone through. Then explain how I can test it with two different accounts." },
+  { id: "keys", area: "data", sev: 3,
+    q: "Have you ever pasted a secret key into the AI chat?",
+    hint: "For example a key from OpenAI or Stripe, or Supabase's \"service role\" key.",
+    how: ["Scroll back through your AI chat and search for \"key\", \"secret\" or \"sk-\".", "Open your live app, right-click, choose \"View page source\" and search for \"sk-\"."],
+    o: [["g", "Never", "Keys only go in the tool's secrets or environment settings."], ["b", "Yes, at least once", "Or a key showed up in the page source."], ["u", "I'm not sure", "If you can't remember, assume you have."]],
+    why: "Researchers scanned about 130,000 sites built on AI app builders and found a leaked secret key on 1 in 5 of them. Bots look for these keys all day.",
+    src: "https://redhuntlabs.com/blog/echoes-of-ai-exposure-thousands-of-secrets-leaking-through-vibe-coded-sites-wave-15-project-resonance/",
+    risk: "Your secret keys may be public",
+    body: "Anyone who finds a key can use your paid accounts or open your database. Move the keys, then replace them with new ones.",
+    prompt: "Find every secret key in this project (OpenAI, Stripe secret key, Supabase service role key, email provider and any others). Move each one into server-side environment variables or edge functions so that none of them appear in front-end code. List every key you moved. I will then create new keys in each provider's dashboard and delete the old ones." },
+  { id: "pay", area: "money", sev: 3, na: "We don't take payments yet",
+    q: "When a customer pays, what unlocks their paid features?",
+    how: ["Make a test payment, then copy the address of the \"payment successful\" page.", "Log out, create a new free account and paste that address into the browser.", "If paid features unlock, anyone can get them for free."],
+    o: [["g", "A message from Stripe to our server", "Developers call this a verified webhook."], ["b", "Reaching the \"payment successful\" page", "Or the free-account test unlocked paid features."], ["u", "I don't know how it works", "Worth checking before your first sale."]],
+    why: "The success page isn't proof of payment: anyone can visit it. And customers who pay but close the tab too early can end up with nothing.",
+    src: "https://butterbase.ai/blog/stripe-payments-vibe-coded-app",
+    risk: "People may get paid features without paying",
+    body: "If a page unlocks access instead of Stripe, you lose revenue one way and frustrate paying customers the other.",
+    prompt: "Grant paid access only from a Stripe webhook that verifies the signature with the webhook signing secret. The success page must never unlock anything by itself. Also handle failed payments and cancellations by removing access. Tell me how to test each case in Stripe test mode." },
+  { id: "limits", area: "money", sev: 2,
+    q: "If someone used your app 10,000 times tonight, would anything stop them?",
+    hint: "Think sign-ups, logins and especially AI features, which cost you money every time they run.",
+    how: ["Open your AI provider and hosting dashboards and look for \"usage limits\", \"budget\" or \"billing alerts\".", "In your app, send the same request 20 times quickly and see if anything slows you down."],
+    o: [["g", "Yes, limits and a spending cap are set", "Both in the app and in each provider's dashboard."], ["b", "No, nothing would stop it", "Every request would go through, and you'd pay for it."], ["u", "I don't know", "Most AI tools don't add limits unless asked."]],
+    why: "One audit of 26 AI-built apps found a way to run up the owner's AI bill in 12 of the 14 apps that had AI features.",
+    src: "https://axonbuild.com/blog/vibe-coded-apps-security-statistics/",
+    risk: "One script could run up a huge bill",
+    body: "Without limits, a bot or one determined user can create thousands of accounts or AI requests overnight, and you pay for every one.",
+    prompt: "Add rate limits per user and per IP address to sign-up, login, password reset and every AI or paid API call. Show a friendly message when a limit is reached. Also tell me where to set a hard monthly spending cap and billing alerts in each provider's dashboard." },
+  { id: "email", area: "run", sev: 2,
+    q: "Do sign-up and password-reset emails reach people you've never met?",
+    how: ["Sign up with a Gmail and an Outlook address you haven't used before.", "Check the inbox and the spam folder.", "Look at who the email is from: your own domain, or a default address?"],
+    o: [["g", "Yes, from our own domain", "They land in the inbox within a minute."], ["b", "Some don't arrive or go to spam", "Or they come from a default address."], ["u", "I've only tried my own email", "That's the one address most likely to work."]],
+    why: "Supabase's built-in sender, which many AI-built apps rely on, is meant for testing. It sends about 2 emails an hour, so after a few sign-ups new users stop getting their link.",
+    src: "https://sendlayer.com/blog/supabase-custom-smtp-and-email-configuration-guide/",
+    risk: "New users may never get their sign-up email",
+    body: "If confirmation or reset emails don't arrive, people can't get in, and they won't tell you. They just leave.",
+    prompt: "Set up a custom email provider (for example Resend) for every sign-up, login and password-reset email, sending from our own domain. List the DNS records (SPF, DKIM and DMARC) I need to add, and raise the email rate limit for production." },
+  { id: "alerts", area: "run", sev: 2,
+    q: "If your app broke at 2am, who would find out first?",
+    how: ["Think back: have you ever received an automatic email about an error or your app being down?", "If not, you probably don't have error tracking or an uptime check yet."],
+    o: [["g", "We would, an alert tells us", "Error tracking and an uptime check are set up."], ["b", "A customer would, eventually", "If they bother to tell us."], ["u", "I'm not sure", "If you've never seen an alert, assume there isn't one."]],
+    why: "In one audit of AI-built apps, 17 of the 21 apps checked had no error tracking at all.",
+    src: "https://axonbuild.com/blog/vibe-coded-apps-security-statistics/",
+    risk: "You'll hear about problems from customers",
+    body: "Without alerts, bugs and outages can sit unnoticed for days, and the first people to find them are the users you worked hardest to get.",
+    prompt: "Add error tracking (for example Sentry) to the front end and the back end, and an uptime check that emails me if the app goes down. Also alert me when a payment fails or a webhook returns an error." },
+  { id: "speed", area: "run", sev: 1,
+    q: "Is your app still fast with lots of users and data?",
+    how: ["Open your busiest page on your phone, using mobile data, and time how long it takes.", "If it already takes more than two or three seconds, it will get slower as you grow."],
+    o: [["g", "Yes, tested with real-sized data", "Hundreds of users or thousands of records."], ["b", "It's already slow in places", "Some pages take a while to load."], ["u", "I've only tried it with a little data", "Usually a handful of test records."]],
+    why: "Speed problems hide in testing. An app that runs smoothly with 100 records can crawl with 100,000.",
+    src: "https://www.redhawk-tech.com/vibe-coded-app-production-ready/",
+    risk: "Real users could slow it to a crawl",
+    body: "Pages that load every record at once feel fine in testing and fall over when real users and real data arrive.",
+    prompt: "Find the slowest pages and database queries. Add pagination so lists never load everything at once, add database indexes for the columns we filter and sort by, and create 10,000 sample records so I can check the speed." },
+  { id: "staging", area: "run", sev: 1,
+    q: "Do you try changes somewhere safe before real users see them?",
+    how: ["When you click publish or deploy, do real users get the change straight away?", "Is there a second copy of the app, with its own test data, where you check things first?"],
+    o: [["g", "Yes, we have a test version", "Changes are checked there before going live."], ["b", "No, changes go straight to users", "The live app is the only version."], ["u", "I'm not sure", "Check your tool's publish settings."]],
+    why: "AI fixes often break something nearby. In one survey, 65 to 75% of developers working on complex features in Lovable reported this \"bug loop\".",
+    src: "https://designrevision.com/blog/why-developers-switch-from-lovable-survey-results",
+    risk: "Every fix is tested on your real customers",
+    body: "When an AI fix breaks something else, your users find it before you do.",
+    prompt: "Set up a separate staging version of this app with its own database and test data. Show me how to publish changes to staging first, check them there, and only then publish to the live app." },
+  { id: "backup", area: "net", sev: 2,
+    q: "If all your data disappeared tonight, could you get it back tomorrow?",
+    how: ["Open your database dashboard and look for \"Backups\".", "The real test: restore a backup into a copy and check that everything is there."],
+    o: [["g", "Yes, we've tested a restore", "We know the steps and how long it takes."], ["b", "No, or we've never tried", "No backups, or none we've ever restored."], ["u", "I think the tool does it", "Free plans often keep few or no backups."]],
+    why: "In July 2025, an AI coding agent deleted a company's live database during a code freeze, then said it couldn't be rolled back.",
+    src: "https://dev.to/joylo/why-replits-ai-agent-deleted-a-production-database-389p",
+    risk: "One mistake could wipe your data",
+    body: "A bad change, a deleted table or an AI agent acting on its own can erase everything. A backup only counts once you've restored one.",
+    prompt: "Turn on daily automatic backups (point-in-time recovery if our plan allows it). Write step-by-step instructions for restoring a backup into a separate copy, and walk me through one test restore." },
+  { id: "own", area: "net", sev: 2,
+    q: "If your AI tool shut down tomorrow, could a developer run your app without it?",
+    how: ["Check that your code is synced to a GitHub account in your own name.", "Check that the database, domain and payment accounts are in your name too, with logins you control."],
+    o: [["g", "Yes, it's all in accounts I own", "Code, database, domain and payments."], ["b", "No, it only runs inside the tool", "Or some of it is in someone else's account."], ["u", "I'm not sure", "Worth ten minutes to find out."]],
+    why: "Leaving an AI app builder is harder than it sounds: pages break, and the database, logins and file storage don't move with the app.",
+    src: "https://www.redhawk-tech.com/vibe-coded-app-production-ready/",
+    risk: "You may not fully own your product",
+    body: "If the code or the accounts live inside a tool or in someone else's name, you can be locked out of your own business.",
+    prompt: "Connect this project to a GitHub repository I own. Then write a README that lists every service the app depends on (database, sign-in, email, payments, hosting), which account each one is in, and how a developer would run the app outside this tool." }
 ];
-$("#checkList").innerHTML = C.map(([id, q]) => `<div class="cq"><p>${q}</p><div class="opts" role="radiogroup" aria-label="${q}">${[["y", "Yes"], ["n", "No"], ["u", "Not sure"]].map(([v, l]) => `<label class="opt"><input type="radio" name="c-${id}" value="${v}"><span>${l}</span></label>`).join("")}</div></div>`).join("");
-$("#checkList").addEventListener("change", e => { state.check[e.target.name.slice(2)] = e.target.value; renderCheck(); });
-
+const ckEl = $("#checker");
+let ckStep = 0;
+function ckGo() { ckEl.dataset.focus = 1; renderCheck(); }
 function renderCheck() {
-  const n = Object.keys(state.check).length, el = $("#checkResult");
-  if (n < 4) { el.innerHTML = `<p class="result-empty">${4 - n} more answer${4 - n > 1 ? "s" : ""} and your score appears. ${C.length} questions in total.</p>`; return; }
-  const yes = C.filter(c => state.check[c[0]] === "y").length;
-  const risks = C.filter(c => state.check[c[0]] && state.check[c[0]] !== "y");
-  const unanswered = C.length - n;
-  const pct = yes / n;
-  const [col, word, line] = pct >= .8 ? ["#14B8A6", "Ready for real users", "Strong foundations. A quick review before you scale is still worth it."]
-    : pct >= .5 ? ["#F59E0B", "Some risky gaps", "It works, but a few gaps could hurt you as users arrive."]
-    : ["#E5484D", "Not safe for real users yet", "These gaps tend to surface at the worst moment: launch day or the first payment dispute."];
-  state.summary = `AI-built app check: ${yes}/${n} yes; ${word}`;
-  el.innerHTML = `
-    <h3>Your app today</h3>
-    <div class="score"><span class="light" style="background:${col}"></span><p class="big" style="font-size:34px;margin:0">${word}</p></div>
-    <p class="small">${yes} of ${n} in place${unanswered ? `, ${unanswered} still to answer` : ""}. ${line}</p>
-    ${risks.length ? `<h3 style="margin-top:18px">Fix these first</h3><ul class="risks">${risks.slice(0, 3).map(r => `<li><b>${r[2]}</b>${r[3]}</li>`).join("")}</ul>` : ""}
-    <a class="btn btn-ink" href="#book" data-from="check">Book a free 20-minute risk walkthrough</a>`;
+  if (ckStep >= CK.length) return renderCheckResult();
+  $("#ckWrap").classList.remove("done");
+  $("#ckWrap").classList.toggle("started", ckStep > 0);
+  const q = CK[ckStep], chosen = state.check[q.id], area = CK_AREAS.find(a => a[0] === q.area)[1];
+  const opts = q.na ? [...q.o, ["na", q.na, "This question will be skipped."]] : q.o;
+  ckEl.innerHTML = `
+    <div class="pl-top">
+      <div class="pl-bar" role="progressbar" aria-valuemin="1" aria-valuemax="${CK.length}" aria-valuenow="${ckStep + 1}" aria-label="Question ${ckStep + 1} of ${CK.length}"><span style="width:${(ckStep + 1) / CK.length * 100}%"></span></div>
+      <span class="pl-count">${ckStep + 1} of ${CK.length}</span>
+    </div>
+    <p class="ck-area">${area}</p>
+    <fieldset class="pl-q">
+      <legend>${q.q}</legend>
+      ${q.hint ? `<p class="pl-hint">${q.hint}</p>` : ""}
+      <div class="ck-how"><h4>Check it in a minute</h4><ol>${q.how.map(h => `<li>${h}</li>`).join("")}</ol></div>
+      <div class="ck-opts">${opts.map(([v, l, d]) => `
+        <label class="pl-opt" data-tone="${v}"><input type="radio" name="ck-${q.id}" value="${v}" ${chosen === v ? "checked" : ""}><span><b>${l}</b>${d ? `<small>${d}</small>` : ""}</span></label>`).join("")}
+      </div>
+    </fieldset>
+    <p class="ck-why"><b>Why we ask:</b> ${q.why} <a href="${q.src}" target="_blank" rel="noopener">Source</a></p>
+    <div class="pl-nav">${ckStep ? `<button type="button" class="pl-back">Back</button>` : "<span></span>"}<span class="pl-note">No email needed</span></div>`;
+  const first = ckEl.querySelector("input:checked") || ckEl.querySelector("input");
+  if (ckEl.dataset.focus) {
+    first.focus({ preventScroll: true });
+    if (ckEl.getBoundingClientRect().top < 80) ckEl.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+  }
+  ckEl.querySelectorAll("input").forEach(i => i.addEventListener("change", () => {
+    state.check[q.id] = i.value;
+    setTimeout(() => { ckStep++; ckGo(); }, 220);
+  }));
+  const back = ckEl.querySelector(".pl-back");
+  if (back) back.addEventListener("click", () => { ckStep--; ckGo(); });
 }
+function renderCheckResult() {
+  $("#ckWrap").classList.add("done");
+  const ans = CK.filter(c => state.check[c.id] && state.check[c.id] !== "na");
+  const good = ans.filter(c => state.check[c.id] === "g").length;
+  const bad = ans.filter(c => state.check[c.id] === "b");
+  const critBad = bad.some(c => c.sev === 3);
+  const pct = ans.length ? good / ans.length : 0;
+  const [tone, word, line] = critBad || pct < .5
+    ? ["b", "Not ready for real users yet", "At least one gap could expose customer data or money. These usually surface at the worst moment: launch day or your first payment dispute."]
+    : pct < .8 || bad.length
+    ? ["u", "Nearly there: close a few gaps first", "The basics are in place, but a few gaps could hurt you as more users arrive."]
+    : ["g", "Looks ready for real users", "Strong foundations. A quick expert review before you scale is still worth it, because AI tools can't check their own work."];
+  const fixes = CK.filter(c => ["b", "u"].includes(state.check[c.id]))
+    .map(c => ({ c, p: c.sev * (state.check[c.id] === "b" ? 2 : 1) }))
+    .sort((a, b) => b.p - a.p).slice(0, 3).map(x => x.c);
+  state.summary = `AI-built app check: ${good}/${ans.length} passed; ${word}${fixes.length ? "; top risk: " + fixes[0].risk : ""}`;
+  const areaHtml = CK_AREAS.map(([id, name]) => {
+    const qs = CK.filter(c => c.area === id && state.check[c.id] !== "na");
+    const v = qs.map(c => state.check[c.id] || "u");
+    const st = v.includes("b") ? ["b", "Fix first"] : v.includes("u") ? ["u", "Check"] : ["g", "Clear"];
+    return `<div><h5>${name}</h5><span class="ck-st ${st[0]}">${qs.length ? st[1] : "Not relevant"}</span><span class="ck-segs">${v.map(x => `<i class="${x}"></i>`).join("")}</span></div>`;
+  }).join("");
+  const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+  ckEl.innerHTML = `
+    <div class="pass ck-report">
+      <div class="pass-head">
+        <div><span class="pass-k">Your pre-flight check</span><p class="pass-route">${word}</p></div>
+        <div class="pass-eta"><span class="pass-k">Checks passed</span><b>${good}/${ans.length}</b></div>
+      </div>
+      <div class="ck-areas">${areaHtml}</div>
+      <div class="ck-fixes">
+        <p>${line}</p>
+        ${fixes.length ? `<ol>${fixes.map(c => `<li class="${state.check[c.id]}"><div><h5>${c.risk}</h5><p>${c.body}</p>
+          <div class="ck-fix-act"><button type="button" class="ck-copy" data-p="${c.id}">Copy the fix prompt</button>
+          <details><summary>See the prompt</summary><p class="ck-prompt">${esc(c.prompt)}</p></details></div></div></li>`).join("")}</ol>`
+        : `<p class="ck-clear">Nothing urgent to fix from these ten checks.</p>`}
+      </div>
+      <p class="ck-note">Paste a fix prompt into Lovable, Bolt, Cursor or whichever tool you used. Then run that question's one-minute test again, because AI tools often say something is fixed when it isn't.</p>
+      <div class="pass-cta">
+        <a class="btn btn-primary" href="#book" data-from="check">Book a free 20-minute risk walkthrough</a>
+        <button type="button" class="pl-back ck-restart">Start again</button>
+      </div>
+    </div>`;
+  ckEl.querySelectorAll(".ck-copy").forEach(b => b.addEventListener("click", async () => {
+    const t = CK.find(c => c.id === b.dataset.p).prompt;
+    try { await navigator.clipboard.writeText(t); b.textContent = "Copied"; b.classList.add("done"); }
+    catch (e) { const d = b.nextElementSibling; d.open = true; b.textContent = "Select the prompt below to copy"; }
+  }));
+  ckEl.querySelector(".ck-restart").addEventListener("click", () => { ckStep = 0; state.check = {}; ckGo(); });
+  ckEl.querySelector(".pass").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "nearest" });
+}
+renderCheck();
 
 /* ---------- lead ---------- */
 
