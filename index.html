@@ -864,7 +864,7 @@ footer .foot-meta{display:flex;flex-direction:column;gap:14px}
   <div class="wrap">
     <div class="sec-head"><h2>Questions founders ask us</h2></div>
     <div class="faq">
-      <details><summary>How much does it cost, and how long does it take?</summary><p>Every product is different, so we don't publish a price list. Most first versions we build reach real users in 4 to 5 weeks, and the planner above gives you a plan for yours in two minutes. After the clarity session you get a fixed quote in writing, before any work starts.</p></details>
+      <details><summary>How much does it cost, and how long does it take?</summary><p>Projects start from $1,000. The exact price depends on what your first version needs, so every quote is tailored. Most first versions we build reach real users in 4 to 5 weeks, and the planner above gives you a plan for yours in two minutes. After the clarity session you get a fixed quote in writing, before any work starts.</p></details>
       <details><summary>Can you fix an app I built with Lovable, Bolt or Cursor?</summary><p>Yes. We review what you have, keep what works, and rebuild what won't survive real users: logins, payments, data and security. Run the "Check my AI-built app" tool above to see where you stand.</p></details>
       <details><summary>I'm not technical. Will I understand what's going on?</summary><p>That's who we build for. Every week you get a working demo you can click and a short plain-English update. You never need to read code to make a decision.</p></details>
       <details><summary>Who owns the code and the idea?</summary><p>You do. The code is in your GitHub from day one, the IP is assigned to you in the contract, and we sign an NDA before you share details if you ask.</p></details>
@@ -890,7 +890,7 @@ footer .foot-meta{display:flex;flex-direction:column;gap:14px}
         <li><span>20–30 min</span><span>The biggest risks, a realistic timeline and what to do next.</span></li>
         <li><span>Afterwards</span><span>A one-page brief in your inbox within 24 hours.</span></li>
       </ul>
-      <div class="reassure"><span>No pitch, no obligation</span><span>Times shown in your time zone</span><span>NDA on request</span></div>
+      <div class="reassure"><span>Projects start from $1,000</span><span>No pitch, no obligation</span><span>Times shown in your time zone</span><span>NDA on request</span></div>
     </div>
     <div class="cal" id="cal">
       <div class="cal-body">
@@ -1348,12 +1348,34 @@ $("#calStage").addEventListener("change", e => { state.stage = e.target.value; m
 function renderStage() { const r = $(`#calStage input[value="${state.stage}"]`); if (r) r.checked = true; mountCalendly(); }
 document.addEventListener("click", e => { if (e.target.closest("[data-from]")) setTimeout(mountCalendly, 0); });
 
+function leadSource() {
+  // First-touch source: UTM tags on the link if present, otherwise the referring site.
+  const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
+  const qs = new URLSearchParams(location.search);
+  let src = {};
+  keys.forEach(k => { if (qs.get(k)) src[k] = qs.get(k); });
+  try {
+    if (src.utm_source) sessionStorage.setItem("pilotory_src", JSON.stringify(src));
+    else { const saved = JSON.parse(sessionStorage.getItem("pilotory_src") || "null"); if (saved) src = saved; }
+  } catch (e) {}
+  if (!src.utm_source) {
+    let host = "";
+    try { host = document.referrer ? new URL(document.referrer).hostname.replace(/^www\./, "") : ""; } catch (e) {}
+    const map = [[/instagram\.com$/, "instagram"], [/(facebook\.com|fb\.com|fb\.me)$/, "facebook"], [/(linkedin\.com|lnkd\.in)$/, "linkedin"], [/(^|\.)(x\.com|t\.co|twitter\.com)$/, "x"], [/google\./, "google"], [/bing\.com$/, "bing"], [/(chatgpt\.com|openai\.com)$/, "chatgpt"], [/whatsapp/, "whatsapp"]];
+    const hit = host && map.find(([re]) => re.test(host));
+    src = { utm_source: hit ? hit[1] : (host && host !== location.hostname ? host : "direct"), utm_medium: hit || host ? "referral" : "none" };
+  }
+  return src;
+}
+
 function calendlyLink() {
   const u = new URL(CONFIG.calendlyUrl);
   const notes = [stageNames[state.stage], state.summary].filter(Boolean).join(" | ");
   if (notes) u.searchParams.set("a1", notes);
-  const qs = new URLSearchParams(location.search);
-  ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].forEach(k => qs.get(k) && u.searchParams.set(k, qs.get(k)));
+  const stageAnswers = { idea: "Just an idea", ai: "Built with AI tools (Lovable, Bolt, Cursor) and needs work", live: "Live app that needs improvement" };
+  if (stageAnswers[state.stage]) u.searchParams.set("a5", stageAnswers[state.stage]);
+  const utm = leadSource();
+  Object.entries(utm).forEach(([k, v]) => v && u.searchParams.set(k, v));
   u.searchParams.set("hide_gdpr_banner", "1");
   return u.toString();
 }
